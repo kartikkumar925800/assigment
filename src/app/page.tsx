@@ -4,8 +4,8 @@ export default function Home() {
   return (
     <div className="min-h-[150vh] bg-white text-gray-900 pb-20">
       {/* Sticky Navbar */}
-      <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-[#F5EFE4] transition-all">
-        <div className="flex items-center gap-2">
+      <nav className="sticky top-0 z-50 flex items-center justify-between px-2 md:px-6 py-3 md:py-4 bg-[#F5EFE4] transition-all">
+        <div className="flex items-center gap-1 md:gap-2">
           {/* Logo */}
           <div className="flex items-center">
             <span className="text-[#F06B27] font-bold text-[32px] leading-none tracking-tighter mr-1">M</span>
@@ -25,10 +25,10 @@ export default function Home() {
           <span className="text-[#F06B27] cursor-pointer text-[15px] leading-none">NEET <span className="font-medium text-gray-500">Test Series</span></span>
         </div>
 
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1.5 bg-white rounded-full pl-3 pr-4 py-1.5 border border-gray-300 shadow-sm">
-            <span className="text-[14px]">📞</span>
-            <span className="text-gray-800 font-semibold text-[14.9px] tracking-tight">+91 74629 99520</span>
+        <div className="flex items-center gap-1 md:gap-3">
+          <div className="flex items-center gap-1 md:gap-1.5 bg-white rounded-full pl-1.5 pr-2 py-1 md:pl-3 md:pr-4 md:py-1.5 border border-gray-300 shadow-sm">
+            <span className="text-[12px] md:text-[14px]">📞</span>
+            <span className="text-gray-800 font-semibold text-[12px] md:text-[14.9px] tracking-tight whitespace-nowrap">+91 74629 99520</span>
           </div>
           <button className="flex items-center justify-center bg-[#1EA651] rounded-full w-[44px] h-[34px] shadow-sm hover:opacity-90 transition">
             <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" className="w-[18px] h-[18px]">
