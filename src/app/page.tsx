@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="min-h-[150vh] bg-[#FDFDF7] text-gray-900 pb-20">
+    <div className="min-h-[150vh] bg-[#F5EFE4] text-gray-900 pb-20">
       {/* Sticky Navbar */}
-      <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-[#FDFDF7] border-b border-gray-200 shadow-sm">
+      <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-[#F5EFE4] border-b border-gray-200 shadow-sm">
         <div className="flex items-center gap-2">
           {/* Logo Placeholder */}
           <div className="flex items-center">
@@ -23,19 +23,19 @@ export default function Home() {
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex items-center bg-white border border-gray-200 shadow-sm" style={{ gap: '4px', borderRadius: '50px', padding: '6px 16px 6px 10px' }}>
-            <span className="text-gray-600 flex items-center justify-center" style={{ width: '16px', height: '16px' }}>📞</span>
-            <span className="text-gray-800 font-semibold" style={{ fontSize: '14.9px', lineHeight: '22.34px', letterSpacing: '-0.3px', fontFamily: 'system-ui, sans-serif' }}>+91 74629 99520</span>
+          <div className="flex items-center gap-1.5 bg-white rounded-full pl-3 pr-4 py-1.5 border border-gray-300 shadow-sm">
+            <span className="text-[14px]">📞</span>
+            <span className="text-gray-800 font-semibold text-[14.9px] tracking-tight">+91 74629 99520</span>
           </div>
-          <button className="flex items-center justify-center shadow-sm" style={{ gap: '4px', borderRadius: '50px', padding: '4px 12px', background: '#1EA651', width: '44px', height: '34px' }}>
-            <div className="flex items-center justify-center bg-white rounded-full text-[#1EA651] font-bold" style={{ width: '20px', height: '20px', fontSize: '12px' }}>W</div>
+          <button className="flex items-center justify-center bg-[#1EA651] rounded-full w-[44px] h-[34px] shadow-sm hover:opacity-90 transition">
+            <div className="w-[20px] h-[20px] bg-white rounded-full flex items-center justify-center text-[#1EA651] font-bold text-[12px]">W</div>
           </button>
         </div>
       </nav>
 
       {/* Sticky Mobile Hero Section (Scrolls behind the rest of the page) */}
       <div className="relative">
-        <div className="md:static sticky top-[72px] -z-10" style={{ background: 'linear-gradient(180deg, #F5EFE4 0%, #D2C9B9 100%)', width: '100%' }}>
+        <div className="md:static sticky top-[72px] z-0" style={{ background: 'linear-gradient(180deg, #F5EFE4 0%, #D2C9B9 100%)', width: '100%' }}>
           <section className="max-w-[1300px] mx-auto pt-8 pb-12 px-4 relative">
             <div 
               className="relative flex flex-col md:flex-row items-center justify-between p-8 md:p-14 min-h-[340px] shadow-2xl border border-white/5"
