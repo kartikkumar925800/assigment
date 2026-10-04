@@ -65,10 +65,10 @@ export default function Home() {
               >
                 {/* Grid & Blur Mask Background */}
                 <div 
-                  className="absolute right-0 top-0 h-full w-[80%] md:w-[727px] z-0 overflow-hidden rounded-[24px] pointer-events-none"
+                  className="absolute right-0 top-0 h-full w-[80%] md:w-[850px] z-0 overflow-hidden rounded-[24px] pointer-events-none"
                   style={{ 
-                    WebkitMaskImage: 'linear-gradient(to right, transparent, black 40%)', 
-                    maskImage: 'linear-gradient(to right, transparent, black 40%)' 
+                    WebkitMaskImage: 'linear-gradient(to right, transparent, black 20%)', 
+                    maskImage: 'linear-gradient(to right, transparent, black 20%)' 
                   }}
                 >
                   <img src="/maskg.svg" alt="" className="w-full h-full object-cover object-right opacity-40 md:opacity-100 mix-blend-screen md:mix-blend-normal" />
