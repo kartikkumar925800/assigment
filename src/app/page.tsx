@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="min-h-[150vh] text-gray-900 pb-20" style={{ background: 'linear-gradient(180deg, #F5EFE4 0%, #D2C9B9 600px, #D2C9B9 100%)' }}>
+    <div className="min-h-[150vh] bg-white text-gray-900 pb-20">
       {/* Sticky Navbar */}
       <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-[#F5EFE4] transition-all">
         <div className="flex items-center gap-2">
@@ -36,8 +36,8 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <div className="w-full">
-        <section className="max-w-[1440px] mx-auto pt-[40px] pb-[100px] md:pt-[60px] md:pb-[20px] px-4 xl:px-[159px] relative z-0">
+      <div style={{ background: 'linear-gradient(180deg, #F5EFE4 0%, #D2C9B9 100%)', width: '100%' }}>
+        <section className="max-w-[1440px] mx-auto pt-[40px] pb-[100px] md:pt-[60px] md:pb-[32px] px-4 xl:px-[159px] relative z-0">
             
             {/* Massive Desktop Background Swoosh */}
             <div 
