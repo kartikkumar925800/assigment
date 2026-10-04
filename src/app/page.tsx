@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="min-h-[150vh] bg-[#FDFDF7] font-sans text-gray-900 pb-20">
+    <div className="min-h-[150vh] bg-[#FDFDF7] text-gray-900 pb-20">
       {/* Sticky Navbar */}
       <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-[#FDFDF7] border-b border-gray-200 shadow-sm">
         <div className="flex items-center gap-2">
