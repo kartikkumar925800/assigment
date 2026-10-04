@@ -14,33 +14,39 @@ export default function Home() {
         </div>
         
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8 text-[13px] font-bold tracking-wide">
+        <div className="hidden md:flex items-center gap-8 tracking-wide">
           <div className="flex flex-col items-center cursor-pointer">
-            <span className="text-gray-800">JEE <span className="font-black">Test Series</span></span>
-            <div className="h-[2px] w-full bg-gray-800 mt-1"></div>
+            <span className="text-gray-800 font-bold text-[15px] leading-none">JEE Test Series</span>
+            <div className="h-[2px] w-full bg-gray-800 mt-1.5"></div>
           </div>
-          <span className="text-[#F06B27] cursor-pointer">NEET <span className="font-medium text-gray-500">Test Series</span></span>
+          <span className="text-[#F06B27] cursor-pointer text-[15px] leading-none">NEET <span className="font-medium text-gray-500">Test Series</span></span>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 bg-white rounded-full px-4 py-2 border border-gray-200 shadow-sm">
-            <span className="text-gray-600 text-sm">📞</span>
-            <span className="text-xs font-bold text-gray-800">+91 74629 99520</span>
+          <div className="flex items-center bg-white border border-gray-200 shadow-sm" style={{ gap: '4px', borderRadius: '50px', padding: '6px 16px 6px 10px' }}>
+            <span className="text-gray-600 flex items-center justify-center" style={{ width: '16px', height: '16px' }}>📞</span>
+            <span className="text-gray-800 font-semibold" style={{ fontSize: '14.9px', lineHeight: '22.34px', letterSpacing: '-0.3px', fontFamily: 'system-ui, sans-serif' }}>+91 74629 99520</span>
           </div>
-          <button className="bg-green-500 text-white p-2 rounded-full w-9 h-9 flex items-center justify-center shadow-md">
-            W
+          <button className="flex items-center justify-center shadow-sm" style={{ gap: '4px', borderRadius: '50px', padding: '4px 12px', background: '#1EA651', width: '44px', height: '34px' }}>
+            <div className="flex items-center justify-center bg-white rounded-full text-[#1EA651] font-bold" style={{ width: '20px', height: '20px', fontSize: '12px' }}>W</div>
           </button>
         </div>
       </nav>
 
       {/* Sticky Mobile Hero Section (Scrolls behind the rest of the page) */}
       <div className="relative">
-        <div className="md:static sticky top-[72px] -z-10">
-          <section className="max-w-[1300px] mx-auto md:mt-8 px-4 relative">
-            <div className="bg-[#101010] rounded-[36px] relative flex flex-col md:flex-row items-center justify-between p-8 md:p-14 min-h-[340px] shadow-2xl border border-[#222]">
+        <div className="md:static sticky top-[72px] -z-10" style={{ background: 'linear-gradient(180deg, #F5EFE4 0%, #D2C9B9 100%)', width: '100%' }}>
+          <section className="max-w-[1300px] mx-auto pt-8 pb-12 px-4 relative">
+            <div 
+              className="relative flex flex-col md:flex-row items-center justify-between p-8 md:p-14 min-h-[340px] shadow-2xl border border-white/5"
+              style={{ 
+                background: 'radial-gradient(94.13% 130.56% at 50% 15.28%, #323232 0%, #090909 100%)',
+                borderRadius: '24px' 
+              }}
+            >
               
               {/* Grid Background - Positioned on the right */}
-              <div className="absolute right-0 top-0 w-[50%] h-full z-0 overflow-hidden rounded-r-[36px]">
+              <div className="absolute right-0 top-0 w-[50%] h-full z-0 overflow-hidden rounded-r-[24px]">
                  <img src="/grid-bg.svg" alt="" className="absolute right-0 top-0 w-full h-[150%] object-contain opacity-40 mix-blend-screen pointer-events-none transform translate-x-12 -translate-y-4" />
               </div>
 
@@ -62,12 +68,37 @@ export default function Home() {
               
               {/* Orange Swoosh */}
               <div className="absolute bottom-[-40px] left-1/4 w-3/4 h-32 z-10 pointer-events-none">
-                 <img src="/swoosh.svg" alt="" className="w-full h-full object-cover opacity-100" style={{ filter: 'drop-shadow(0px -5px 10px rgba(0,0,0,0.3))' }} />
+                 <img 
+                   src="/swoosh.svg" 
+                   alt="" 
+                   className="w-full h-full object-cover opacity-100" 
+                   style={{ filter: 'drop-shadow(0px -5px 10px rgba(0,0,0,0.3)) drop-shadow(-182px 195px 49px rgba(0,0,0,0.5))' }} 
+                 />
               </div>
               
+              {/* Frosted Glass Layer Behind Teacher */}
+              <div 
+                className="absolute right-[2%] top-[-5%] z-10 hidden md:block"
+                style={{ 
+                  width: '624px', 
+                  height: '326px', 
+                  borderRadius: '30px', 
+                  background: 'rgba(217, 217, 217, 0.05)', 
+                  backdropFilter: 'blur(107px)' 
+                }}
+              ></div>
+
               {/* Real Teacher Image - Breaking out of the box */}
               <div className="absolute bottom-[-80px] right-[5%] z-20 md:w-auto flex justify-end pointer-events-none">
-                 <Image src="/teacher.png" alt="Mr. Anand Jaiswal" width={420} height={500} className="object-contain" priority />
+                 <Image 
+                   src="/teacher.png" 
+                   alt="Mr. Anand Jaiswal" 
+                   width={420} 
+                   height={500} 
+                   className="object-contain" 
+                   style={{ filter: 'drop-shadow(10px 23px 24px rgba(0,0,0,0.25))' }}
+                   priority 
+                 />
               </div>
             </div>
           </section>
