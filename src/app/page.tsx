@@ -37,7 +37,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <div style={{ background: 'linear-gradient(180deg, #F5EFE4 0%, #D2C9B9 100%)', width: '100%' }}>
-        <section className="max-w-[1440px] mx-auto pt-[40px] pb-[100px] md:pt-[60px] md:pb-[32px] px-4 xl:px-[159px] relative z-0">
+        <section className="max-w-[1440px] mx-auto pt-[40px] pb-[40px] md:pt-[60px] md:pb-[32px] px-4 xl:px-[159px] relative z-0">
             
             {/* Massive Desktop Background Swoosh */}
             <div 
@@ -75,7 +75,7 @@ export default function Home() {
                 </div>
 
 
-                <div className="relative z-20 w-[65%] md:w-[60%] text-left pt-2 pl-2 md:pl-2">
+                <div className="relative z-40 w-[55%] md:w-[60%] text-left pt-2 pl-2 md:pl-2">
                   <h2 className="text-white font-black text-[18px] md:text-[28px] mb-1 md:mb-1 tracking-wide flex items-center leading-none">ME<span className="text-[#FF7800]">A</span>ITS</h2>
                   <h3 className="text-white text-[24px] md:text-[44px] font-bold mb-2 md:mb-3 leading-[1.1] tracking-tight">
                     Mentors Eduserv’s<br className="hidden md:block" /> All India <br className="md:hidden" />Test Series
