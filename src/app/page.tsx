@@ -39,9 +39,17 @@ export default function Home() {
       <div style={{ background: 'linear-gradient(180deg, #F5EFE4 0%, #D2C9B9 100%)', width: '100%' }}>
         <section className="max-w-[1440px] mx-auto pt-[40px] pb-[100px] md:pt-[60px] md:pb-[20px] px-4 xl:px-[159px] relative z-0">
             
+            {/* Massive Desktop Background Swoosh */}
+            <div 
+              className="absolute inset-0 w-full h-full z-10 pointer-events-none hidden md:block" 
+              style={{ filter: 'drop-shadow(-182px 195px 49.1px rgba(0,0,0,0.5))' }}
+            >
+              <img src="/swoosh-bg.png" alt="" className="w-full h-full object-contain object-bottom" />
+            </div>
+
             {/* Outer Black Card */}
             <div 
-              className="relative w-full max-w-[1122px] mx-auto rounded-[27px] md:rounded-[32px] p-[6.75px] pb-[10px] md:p-[8px] md:pb-[12px] z-10"
+              className="relative w-full max-w-[1122px] mx-auto rounded-[27px] md:rounded-[32px] p-[6.75px] pb-[10px] md:p-[8px] md:pb-[12px]"
               style={{ 
                 background: '#090909',
                 boxShadow: '0px 12px 26px 0px rgba(0,0,0,0.1), 0px 47px 47px 0px rgba(0,0,0,0.09), 0px 105px 63px 0px rgba(0,0,0,0.05), 0px 187px 75px 0px rgba(0,0,0,0.01)'
@@ -60,19 +68,6 @@ export default function Home() {
                   <img src="/maskg.svg" alt="" className="w-full h-full object-cover object-left opacity-40 md:opacity-100 mix-blend-screen md:mix-blend-normal" />
                 </div>
 
-                {/* Massive Desktop Background Swoosh */}
-                <div 
-                  className="absolute z-10 pointer-events-none hidden md:block" 
-                  style={{ 
-                    top: '54.5px', 
-                    left: '-257.84px', 
-                    width: '1633.83px', 
-                    height: '410.5px',
-                    filter: 'drop-shadow(-182px 195px 49.1px rgba(0,0,0,0.5))' 
-                  }}
-                >
-                  <img src="/swoosh-bg.png" alt="" className="w-full h-full object-contain" />
-                </div>
 
                 <div className="relative z-20 w-[65%] md:w-[60%] text-left pt-2 pl-2 md:pl-2">
                   <h2 className="text-white font-black text-[18px] md:text-[28px] mb-1 md:mb-1 tracking-wide flex items-center leading-none">ME<span className="text-[#FF7800]">A</span>ITS</h2>
