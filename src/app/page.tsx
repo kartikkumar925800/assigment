@@ -186,7 +186,7 @@ export default function Home() {
                       <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2"><span className="text-black font-semibold text-[15px]">✓</span> Weak Topic Sessions, Based on Your Tests</p>
                     </div>
                     <div className="pt-3">
-                      <p className="text-[11px] font-semibold text-gray-400 mb-2">Also Includes</p>
+                      <span className="inline-block bg-[#F5EFE4] rounded-[8px] px-[6px] py-[2px] font-['Aileron',sans-serif] font-semibold text-[13px] text-[#303030] leading-none mb-3">Also Includes</span>
                       <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> Detailed Performance Analysis</p>
                       <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2"><span className="text-black font-semibold text-[15px]">✓</span> Video Solutions for each Test Series Qs</p>
                     </div>
@@ -254,7 +254,7 @@ export default function Home() {
                       <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2"><span className="text-black font-semibold text-[15px]">✓</span> Weak Topic Sessions, Based on Your Tests</p>
                     </div>
                     <div className="pt-3">
-                      <p className="text-[11px] font-semibold text-gray-400 mb-2">Also Includes</p>
+                      <span className="inline-block bg-[#F5EFE4] rounded-[8px] px-[6px] py-[2px] font-['Aileron',sans-serif] font-semibold text-[13px] text-[#303030] leading-none mb-3">Also Includes</span>
                       <p className="text-[15px] font-[600] font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2 mb-2"><span className="text-red-500 font-bold text-[15px]">✓</span> Centre-Based CBT Tests</p>
                       <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> Detailed Performance Analysis</p>
                       <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2"><span className="text-black font-semibold text-[15px]">✓</span> Video Solutions for each Test Series Qs</p>
