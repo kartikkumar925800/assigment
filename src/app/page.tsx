@@ -41,8 +41,11 @@ export default function Home() {
         <div className="md:static sticky top-[72px] z-0" style={{ background: 'linear-gradient(180deg, #F5EFE4 0%, #D2C9B9 100%)', width: '100%' }}>
           <section className="max-w-[1440px] mx-auto py-10 px-4 xl:px-[159px] relative">
             <div 
-              className="relative flex flex-col md:flex-row items-center justify-between p-8 md:p-14 min-h-[323px] w-full max-w-[1122px] mx-auto shadow-2xl rounded-[32px]"
-              style={{ background: 'radial-gradient(94.13% 130.56% at 50% 15.28%, #323232 0%, #090909 100%)' }}
+              className="relative flex flex-col md:flex-row items-center justify-between p-8 md:p-14 min-h-[323px] w-full max-w-[1122px] mx-auto rounded-[32px]"
+              style={{ 
+                background: 'radial-gradient(94.13% 130.56% at 50% 15.28%, #323232 0%, #090909 100%)',
+                boxShadow: '0px 12px 26px 0px rgba(0,0,0,0.1), 0px 47px 47px 0px rgba(0,0,0,0.09), 0px 105px 63px 0px rgba(0,0,0,0.05), 0px 187px 75px 0px rgba(0,0,0,0.01)'
+              }}
             >
               
               {/* Full SVG Background (Includes gradient, border, grid, and blur mask) */}
