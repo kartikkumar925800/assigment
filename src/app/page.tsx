@@ -6,10 +6,13 @@ export default function Home() {
       {/* Sticky Navbar */}
       <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-[#F5EFE4] transition-all">
         <div className="flex items-center gap-2">
-          {/* Logo Placeholder */}
+          {/* Logo */}
           <div className="flex items-center">
-            <span className="text-[#F06B27] font-bold text-2xl tracking-tighter">M</span>
-            <span className="font-semibold text-lg ml-1 text-gray-800">entors Eduserv</span>
+            <span className="text-[#F06B27] font-bold text-[32px] leading-none tracking-tighter mr-1">M</span>
+            <div className="flex flex-col leading-[1.1] text-gray-800 font-semibold text-[15px]">
+              <span>entors</span>
+              <span>Eduserv</span>
+            </div>
           </div>
         </div>
         
@@ -37,7 +40,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <div style={{ background: 'linear-gradient(180deg, #F5EFE4 0%, #D2C9B9 100%)', width: '100%' }}>
-        <section className="max-w-[1440px] mx-auto pt-[40px] pb-[24px] md:pt-[60px] md:pb-[32px] px-4 xl:px-[159px] relative z-0">
+        <section className="max-w-[1440px] mx-auto pt-[40px] pb-[40px] md:pt-[60px] md:pb-[32px] px-4 xl:px-[159px] relative z-0">
             
             {/* Massive Desktop Background Swoosh */}
             <div 
