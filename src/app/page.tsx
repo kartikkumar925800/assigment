@@ -119,7 +119,7 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-6 relative">
               
               {/* Absolute Claim Offer Badge */}
-              <div className="absolute -right-4 md:-right-8 top-16 z-50 hidden md:flex flex-col items-center pointer-events-auto cursor-pointer transition hover:-translate-y-1" style={{ width: '90px' }}>
+              <div className="absolute -right-4 md:-right-[120px] top-16 md:top-24 z-50 hidden md:flex flex-col items-center pointer-events-auto cursor-pointer transition hover:-translate-y-1" style={{ width: '90px' }}>
                 <div className="relative flex flex-col items-center w-full">
                   {/* Gift Icon */}
                   <img src="/gift.png" alt="Gift" className="w-[34px] h-[34px] relative z-10 translate-y-[6px] drop-shadow-md" />
