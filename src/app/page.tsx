@@ -35,10 +35,9 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Sticky Mobile Hero Section (Scrolls behind the rest of the page) */}
-      <div className="relative">
-        <div className="md:static sticky top-[72px] z-0" style={{ background: 'linear-gradient(180deg, #F5EFE4 0%, #D2C9B9 100%)', width: '100%' }}>
-          <section className="max-w-[1440px] mx-auto pt-[40px] pb-[40px] md:pt-[60px] md:pb-[20px] px-4 xl:px-[159px] relative z-0">
+      {/* Hero Section */}
+      <div style={{ background: 'linear-gradient(180deg, #F5EFE4 0%, #D2C9B9 100%)', width: '100%' }}>
+        <section className="max-w-[1440px] mx-auto pt-[40px] pb-[100px] md:pt-[60px] md:pb-[20px] px-4 xl:px-[159px] relative z-0">
             
             {/* Outer Black Card */}
             <div 
@@ -58,7 +57,7 @@ export default function Home() {
               >
                 {/* Grid & Blur Mask Background */}
                 <div className="absolute right-0 top-0 h-full w-[80%] md:w-[727px] z-0 overflow-hidden rounded-[24px] pointer-events-none">
-                  <img src="/maskg.svg" alt="" className="w-full h-full object-cover md:object-contain object-right opacity-40 md:opacity-100 mix-blend-screen md:mix-blend-normal" />
+                  <img src="/maskg.svg" alt="" className="w-full h-full object-cover object-left opacity-40 md:opacity-100 mix-blend-screen md:mix-blend-normal" />
                 </div>
 
                 {/* Massive Desktop Background Swoosh */}
@@ -92,7 +91,7 @@ export default function Home() {
                 </div>
                 
                 {/* Real Teacher Image - Breaking out of the box */}
-                <div className="absolute bottom-[-15px] md:bottom-[-40px] -right-[15px] md:-right-[20px] z-30 w-[220px] md:w-[320px] flex justify-end pointer-events-none">
+                <div className="absolute bottom-[-100px] md:bottom-[-40px] right-[-10px] md:-right-[20px] z-30 w-[280px] md:w-[320px] flex justify-end pointer-events-none">
                    <Image 
                      src="/teacher.png" 
                      alt="Mr. Anand Jaiswal" 
@@ -104,12 +103,11 @@ export default function Home() {
                    />
                 </div>
               </div>
-            </div>
           </section>
-        </div>
+      </div>
 
-        {/* The rest of the content has a solid background so it slides OVER the sticky hero on mobile */}
-        <div className="relative z-10 bg-[#FDFDF7] rounded-t-[40px] md:rounded-none mt-4 md:mt-0 pt-8 pb-10 shadow-[0_-10px_20px_rgba(0,0,0,0.05)] md:shadow-none">
+      {/* The rest of the content */}
+      <div className="relative z-10 pt-4 md:pt-0 mt-4 md:mt-0 pb-10">
           
           {/* Pricing Header */}
           <section className="max-w-[1000px] mx-auto px-4">
