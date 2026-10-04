@@ -38,19 +38,19 @@ export default function Home() {
 
       {/* Sticky Mobile Hero Section (Scrolls behind the rest of the page) */}
       <div className="relative">
-        <div className="md:static sticky top-[72px] z-0" style={{ background: 'linear-gradient(180deg, #F5EFE4 0%, #D2C9B9 100%)', width: '100%' }          <section className="max-w-[1440px] mx-auto py-10 px-4 xl:px-[159px] relative">
+        <div className="md:static sticky top-[72px] z-0" style={{ background: 'linear-gradient(180deg, #F5EFE4 0%, #D2C9B9 100%)', width: '100%' }}>
+          <section className="max-w-[1440px] mx-auto py-6 md:py-10 px-4 xl:px-[159px] relative">
             {/* Outer Black Card */}
             <div 
-              className="relative w-full max-w-[1122px] mx-auto rounded-[32px]"
+              className="relative w-full max-w-[1122px] mx-auto rounded-[27px] md:rounded-[32px] p-[6.75px] pb-[10px] md:p-[8px] md:pb-[12px]"
               style={{ 
                 background: '#090909',
-                boxShadow: '0px 12px 26px 0px rgba(0,0,0,0.1), 0px 47px 47px 0px rgba(0,0,0,0.09), 0px 105px 63px 0px rgba(0,0,0,0.05), 0px 187px 75px 0px rgba(0,0,0,0.01)',
-                padding: '8px 8px 12px 8px'
+                boxShadow: '0px 12px 26px 0px rgba(0,0,0,0.1), 0px 47px 47px 0px rgba(0,0,0,0.09), 0px 105px 63px 0px rgba(0,0,0,0.05), 0px 187px 75px 0px rgba(0,0,0,0.01)'
               }}
             >
               {/* Inner Gradient Card */}
               <div 
-                className="relative flex flex-col md:flex-row items-center justify-between pt-10 pb-8 px-6 md:p-14 min-h-[287px] w-full rounded-[24px]"
+                className="relative flex flex-col md:flex-row items-center justify-between pt-6 pb-6 px-4 md:p-14 min-h-[250px] md:min-h-[287px] w-full rounded-[20px] md:rounded-[24px]"
                 style={{ 
                   background: 'radial-gradient(94.13% 130.56% at 50% 15.28%, #323232 0%, #090909 100%)',
                   border: '1px solid rgba(255,255,255,0.1)'
@@ -62,14 +62,14 @@ export default function Home() {
                   <img src="/maskg.svg" alt="" className="w-full h-full object-cover md:object-contain object-right opacity-40 md:opacity-100 mix-blend-screen md:mix-blend-normal" />
                 </div>
 
-                <div className="relative z-20 md:w-[60%] text-left pt-2 pl-2 md:pl-8">
-                  <h2 className="text-white font-black text-2xl md:text-[32px] mb-2 tracking-wide flex items-center leading-none">ME<span className="text-[#FF7800]">A</span>ITS</h2>
-                  <h3 className="text-white text-[38px] md:text-[52px] font-bold mb-4 leading-[1.1] tracking-tight">
-                    Mentors Eduserv’s All India<br />Test Series
+                <div className="relative z-20 w-[65%] md:w-[60%] text-left pt-2 pl-2 md:pl-8">
+                  <h2 className="text-white font-black text-[18px] md:text-[32px] mb-1 md:mb-2 tracking-wide flex items-center leading-none">ME<span className="text-[#FF7800]">A</span>ITS</h2>
+                  <h3 className="text-white text-[24px] md:text-[52px] font-bold mb-2 md:mb-4 leading-[1.1] tracking-tight">
+                    Mentors Eduserv’s<br className="hidden md:block" /> All India <br className="md:hidden" />Test Series
                   </h3>
-                  <p className="text-[#F06B27] font-bold text-[24px] md:text-[28px] mb-12">JEE Main & Adv 2027</p>
+                  <p className="text-[#F06B27] font-bold text-[16px] md:text-[28px] mb-6 md:mb-12">JEE Main & Adv 2027</p>
                   
-                  <p className="text-gray-400 text-[13px] font-medium mb-3">Designed by Mr. Anand Jaiswal</p>
+                  <p className="text-gray-400 text-[10px] md:text-[13px] font-medium mb-2 md:mb-3">Designed by <br className="md:hidden" />Mr. Anand Jaiswal</p>
                   
                   <div className="flex gap-2">
                     <div className="w-1.5 h-1.5 bg-[#F06B27] rounded-full"></div>
@@ -79,30 +79,30 @@ export default function Home() {
                 </div>
                 
                 {/* Orange Swoosh */}
-                <div className="absolute bottom-0 left-[10%] w-[80%] md:w-[60%] h-[120px] z-10 pointer-events-none opacity-80 md:opacity-100 flex items-end">
+                <div className="absolute bottom-[-10px] md:bottom-0 left-0 md:left-[10%] w-[100%] md:w-[60%] h-[120px] z-10 pointer-events-none opacity-100 flex items-end overflow-hidden md:overflow-visible">
                    <img 
                      src="/swoosh.svg" 
                      alt="" 
-                     className="w-full h-auto object-contain object-bottom transform translate-y-4" 
-                     style={{ filter: 'drop-shadow(0px -5px 10px rgba(0,0,0,0.3)) drop-shadow(-182px 195px 49px rgba(0,0,0,0.5))' }} 
+                     className="w-[150%] md:w-full h-auto object-cover md:object-contain object-bottom transform translate-y-4 md:translate-x-0 -translate-x-[20%]" 
+                     style={{ filter: 'drop-shadow(0px -5px 10px rgba(0,0,0,0.3))' }} 
                    />
                 </div>
                 
                 {/* Real Teacher Image - Breaking out of the box */}
-                <div className="absolute bottom-[-20px] md:bottom-[-80px] right-[5%] z-20 md:w-auto flex justify-end pointer-events-none">
+                <div className="absolute bottom-[-15px] md:bottom-[-80px] -right-[10px] md:right-[5%] z-20 w-[180px] md:w-auto flex justify-end pointer-events-none">
                    <Image 
                      src="/teacher.png" 
                      alt="Mr. Anand Jaiswal" 
                      width={420} 
                      height={500} 
-                     className="object-contain" 
+                     className="object-contain w-full h-auto" 
                      style={{ filter: 'drop-shadow(10px 23px 24px rgba(0,0,0,0.25))' }}
                      priority 
                    />
                 </div>
               </div>
             </div>
-          </section>tion>
+          </section>
         </div>
 
         {/* The rest of the content has a solid background so it slides OVER the sticky hero on mobile */}
