@@ -50,7 +50,7 @@ export default function Home() {
             >
               {/* Inner Gradient Card */}
               <div 
-                className="relative flex flex-col md:flex-row items-center justify-between pt-6 pb-6 px-4 md:p-14 min-h-[250px] md:min-h-[287px] w-full rounded-[20px] md:rounded-[24px]"
+                className="relative flex flex-col md:flex-row items-center justify-between pt-6 pb-6 px-4 md:px-8 md:py-8 min-h-[250px] md:min-h-[287px] w-full rounded-[20px] md:rounded-[24px]"
                 style={{ 
                   background: 'radial-gradient(94.13% 130.56% at 50% 15.28%, #323232 0%, #090909 100%)',
                   border: '1px solid rgba(255,255,255,0.1)'
@@ -62,12 +62,12 @@ export default function Home() {
                   <img src="/maskg.svg" alt="" className="w-full h-full object-cover md:object-contain object-right opacity-40 md:opacity-100 mix-blend-screen md:mix-blend-normal" />
                 </div>
 
-                <div className="relative z-20 w-[65%] md:w-[60%] text-left pt-2 pl-2 md:pl-8">
-                  <h2 className="text-white font-black text-[18px] md:text-[32px] mb-1 md:mb-2 tracking-wide flex items-center leading-none">ME<span className="text-[#FF7800]">A</span>ITS</h2>
-                  <h3 className="text-white text-[24px] md:text-[52px] font-bold mb-2 md:mb-4 leading-[1.1] tracking-tight">
+                <div className="relative z-20 w-[65%] md:w-[60%] text-left pt-2 pl-2 md:pl-2">
+                  <h2 className="text-white font-black text-[18px] md:text-[28px] mb-1 md:mb-1 tracking-wide flex items-center leading-none">ME<span className="text-[#FF7800]">A</span>ITS</h2>
+                  <h3 className="text-white text-[24px] md:text-[44px] font-bold mb-2 md:mb-3 leading-[1.1] tracking-tight">
                     Mentors Eduserv’s<br className="hidden md:block" /> All India <br className="md:hidden" />Test Series
                   </h3>
-                  <p className="text-[#F06B27] font-bold text-[16px] md:text-[28px] mb-6 md:mb-12">JEE Main & Adv 2027</p>
+                  <p className="text-[#F06B27] font-bold text-[16px] md:text-[24px] mb-6 md:mb-10">JEE Main & Adv 2027</p>
                   
                   <p className="text-gray-400 text-[10px] md:text-[13px] font-medium mb-2 md:mb-3">Designed by <br className="md:hidden" />Mr. Anand Jaiswal</p>
                   
@@ -76,16 +76,6 @@ export default function Home() {
                     <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div>
                     <div className="w-1.5 h-1.5 bg-gray-500 rounded-full"></div>
                   </div>
-                </div>
-                
-                {/* Orange Swoosh */}
-                <div className="absolute bottom-[-10px] md:bottom-0 left-0 md:left-[10%] w-[100%] md:w-[60%] h-[120px] z-10 pointer-events-none opacity-100 flex items-end overflow-hidden md:overflow-visible">
-                   <img 
-                     src="/swoosh.svg" 
-                     alt="" 
-                     className="w-[150%] md:w-full h-auto object-cover md:object-contain object-bottom transform translate-y-4 md:translate-x-0 -translate-x-[20%]" 
-                     style={{ filter: 'drop-shadow(0px -5px 10px rgba(0,0,0,0.3))' }} 
-                   />
                 </div>
                 
                 {/* Real Teacher Image - Breaking out of the box */}
