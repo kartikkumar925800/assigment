@@ -159,23 +159,23 @@ export default function Home() {
                   <div className="space-y-6">
                     <div>
                       <span className="bg-[#F06B27] text-white text-[14px] font-bold leading-none px-3 py-1 rounded inline-block mb-2.5">JEE पकड़ Test series</span>
-                      <p className="text-[15px] font-normal leading-none text-gray-700 flex items-center gap-2"><span className="text-black font-semibold text-[15px]">✓</span> 6 unit · 6 part tests · 22 full tests</p>
+                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-center gap-2"><span className="text-black font-semibold text-[15px]">✓</span> 6 unit · 6 part tests · 22 full tests</p>
                     </div>
                     <div>
                       <span className="bg-[#F06B27] text-white text-[14px] font-bold leading-none px-3 py-1 rounded inline-block mb-2.5">पढ़ाव Mock Tests</span>
-                      <p className="text-[15px] font-normal leading-none text-gray-700 flex items-center gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> 140+ Mock tests</p>
-                      <p className="text-[15px] font-normal leading-none text-gray-700 flex items-center gap-2"><span className="text-black font-semibold text-[15px]">✓</span> 160+ PYQ tests</p>
+                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-center gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> 140+ Mock tests</p>
+                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-center gap-2"><span className="text-black font-semibold text-[15px]">✓</span> 160+ PYQ tests</p>
                     </div>
                     <div>
                       <span className="bg-[#F06B27] text-white text-[14px] font-bold leading-none px-3 py-1 rounded inline-block mb-2.5">आईना Sessions</span>
-                      <p className="text-[15px] font-normal leading-none text-gray-700 flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> AIR 1 Guidance Sessions</p>
-                      <p className="text-[15px] font-normal leading-none text-gray-700 flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> Boards vs Competitive Exam Management</p>
-                      <p className="text-[15px] font-normal leading-none text-gray-700 flex items-start gap-2"><span className="text-black font-semibold text-[15px]">✓</span> Weak Topic Sessions, Based on Your Tests</p>
+                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> AIR 1 Guidance Sessions</p>
+                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> Boards vs Competitive Exam Management</p>
+                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2"><span className="text-black font-semibold text-[15px]">✓</span> Weak Topic Sessions, Based on Your Tests</p>
                     </div>
                     <div className="pt-3">
                       <p className="text-[11px] font-semibold text-gray-400 mb-2">Also Includes</p>
-                      <p className="text-[15px] font-normal leading-none text-gray-700 flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> Detailed Performance Analysis</p>
-                      <p className="text-[15px] font-normal leading-none text-gray-700 flex items-start gap-2"><span className="text-black font-semibold text-[15px]">✓</span> Video Solutions for each Test Series Qs</p>
+                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> Detailed Performance Analysis</p>
+                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2"><span className="text-black font-semibold text-[15px]">✓</span> Video Solutions for each Test Series Qs</p>
                     </div>
                   </div>
                 </div>
@@ -227,24 +227,24 @@ export default function Home() {
                   <div className="space-y-6">
                     <div>
                       <span className="bg-[#F06B27] text-white text-[14px] font-bold leading-none px-3 py-1 rounded inline-block mb-2.5">JEE पकड़ Test series</span>
-                      <p className="text-[15px] font-normal leading-none text-gray-700 flex items-center gap-2"><span className="text-black font-semibold text-[15px]">✓</span> 6 unit · 6 part tests · 22 full tests</p>
+                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-center gap-2"><span className="text-black font-semibold text-[15px]">✓</span> 6 unit · 6 part tests · 22 full tests</p>
                     </div>
                     <div>
                       <span className="bg-[#F06B27] text-white text-[14px] font-bold leading-none px-3 py-1 rounded inline-block mb-2.5">पढ़ाव Mock Tests</span>
-                      <p className="text-[15px] font-normal leading-none text-gray-700 flex items-center gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> 140+ Mock tests</p>
-                      <p className="text-[15px] font-normal leading-none text-gray-700 flex items-center gap-2"><span className="text-black font-semibold text-[15px]">✓</span> 160+ PYQ tests</p>
+                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-center gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> 140+ Mock tests</p>
+                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-center gap-2"><span className="text-black font-semibold text-[15px]">✓</span> 160+ PYQ tests</p>
                     </div>
                     <div>
                       <span className="bg-[#F06B27] text-white text-[14px] font-bold leading-none px-3 py-1 rounded inline-block mb-2.5">आईना Sessions</span>
-                      <p className="text-[15px] font-normal leading-none text-gray-700 flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> AIR 1 Guidance Sessions</p>
-                      <p className="text-[15px] font-normal leading-none text-gray-700 flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> Boards vs Competitive Exam Management</p>
-                      <p className="text-[15px] font-normal leading-none text-gray-700 flex items-start gap-2"><span className="text-black font-semibold text-[15px]">✓</span> Weak Topic Sessions, Based on Your Tests</p>
+                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> AIR 1 Guidance Sessions</p>
+                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> Boards vs Competitive Exam Management</p>
+                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2"><span className="text-black font-semibold text-[15px]">✓</span> Weak Topic Sessions, Based on Your Tests</p>
                     </div>
                     <div className="pt-3">
                       <p className="text-[11px] font-semibold text-gray-400 mb-2">Also Includes</p>
-                      <p className="text-[15px] font-bold text-gray-900 flex items-start gap-2 mb-2"><span className="text-red-500 font-bold text-[15px]">✓</span> Centre-Based CBT Tests</p>
-                      <p className="text-[15px] font-normal leading-none text-gray-700 flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> Detailed Performance Analysis</p>
-                      <p className="text-[15px] font-normal leading-none text-gray-700 flex items-start gap-2"><span className="text-black font-semibold text-[15px]">✓</span> Video Solutions for each Test Series Qs</p>
+                      <p className="text-[15px] font-[600] font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2 mb-2"><span className="text-red-500 font-bold text-[15px]">✓</span> Centre-Based CBT Tests</p>
+                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> Detailed Performance Analysis</p>
+                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2"><span className="text-black font-semibold text-[15px]">✓</span> Video Solutions for each Test Series Qs</p>
                     </div>
                   </div>
                 </div>
