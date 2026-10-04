@@ -91,14 +91,14 @@ export default function Home() {
                 </div>
                 
                 {/* Real Teacher Image - Breaking out of the box */}
-                <div className="absolute bottom-[-100px] md:bottom-[-40px] right-[-10px] md:-right-[20px] z-30 w-[280px] md:w-[320px] flex justify-end pointer-events-none">
+                <div className="absolute bottom-[-55px] md:bottom-[-40px] right-[-10px] md:-right-[20px] z-30 w-[197px] md:w-[320px] flex justify-end pointer-events-none">
                    <Image 
                      src="/teacher.png" 
                      alt="Mr. Anand Jaiswal" 
                      width={420} 
                      height={500} 
                      className="object-contain w-full h-auto" 
-                     style={{ filter: 'drop-shadow(10px 23px 24px rgba(0,0,0,0.25))' }}
+                     style={{ filter: 'drop-shadow(7px 16px 17px rgba(0,0,0,0.25))' }}
                      priority 
                    />
                 </div>
