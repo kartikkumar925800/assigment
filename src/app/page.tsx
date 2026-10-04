@@ -50,14 +50,14 @@ export default function Home() {
                  <img src="/grid-bg.svg" alt="" className="absolute right-0 top-0 w-full h-[150%] object-contain opacity-40 mix-blend-screen pointer-events-none transform translate-x-12 -translate-y-4" />
               </div>
 
-              <div className="relative z-20 md:w-1/2 text-left pt-6">
-                <h2 className="text-white font-black text-[56px] mb-1 tracking-tight flex items-center leading-none">ME<span className="text-[#FF7800]">A</span>ITS</h2>
-                <h3 className="text-white text-3xl md:text-[34px] font-semibold mb-5 leading-tight tracking-tight">
+              <div className="relative z-20 md:w-[60%] text-left pt-6 pl-2 md:pl-8">
+                <h2 className="text-white font-black text-2xl md:text-[32px] mb-2 tracking-wide flex items-center leading-none">ME<span className="text-[#FF7800]">A</span>ITS</h2>
+                <h3 className="text-white text-[38px] md:text-[52px] font-bold mb-4 leading-[1.1] tracking-tight">
                   Mentors Eduserv’s All India<br />Test Series
                 </h3>
-                <p className="text-[#F06B27] font-bold text-[22px] mb-10">JEE Main & Adv 2027</p>
+                <p className="text-[#F06B27] font-bold text-[24px] md:text-[28px] mb-12">JEE Main & Adv 2027</p>
                 
-                <p className="text-gray-400 text-sm font-medium mb-4">Designed by Mr. Anand Jaiswal</p>
+                <p className="text-gray-400 text-[13px] font-medium mb-3">Designed by Mr. Anand Jaiswal</p>
                 
                 <div className="flex gap-2">
                   <div className="w-1.5 h-1.5 bg-[#F06B27] rounded-full"></div>
@@ -67,24 +67,24 @@ export default function Home() {
               </div>
               
               {/* Orange Swoosh */}
-              <div className="absolute bottom-[-40px] left-1/4 w-3/4 h-32 z-10 pointer-events-none">
+              <div className="absolute bottom-0 left-[10%] w-[80%] md:w-[60%] h-[120px] z-10 pointer-events-none opacity-80 md:opacity-100 flex items-end">
                  <img 
                    src="/swoosh.svg" 
                    alt="" 
-                   className="w-full h-full object-cover opacity-100" 
+                   className="w-full h-auto object-contain object-bottom transform translate-y-4" 
                    style={{ filter: 'drop-shadow(0px -5px 10px rgba(0,0,0,0.3)) drop-shadow(-182px 195px 49px rgba(0,0,0,0.5))' }} 
                  />
               </div>
               
               {/* Frosted Glass Layer Behind Teacher */}
               <div 
-                className="absolute right-[2%] top-[-5%] z-10 hidden md:block"
+                className="absolute right-[5%] bottom-0 z-10 hidden md:block"
                 style={{ 
-                  width: '624px', 
-                  height: '326px', 
-                  borderRadius: '30px', 
-                  background: 'rgba(217, 217, 217, 0.05)', 
-                  backdropFilter: 'blur(107px)' 
+                  width: '500px', 
+                  height: '280px', 
+                  borderRadius: '120px 120px 0 0', 
+                  background: 'linear-gradient(180deg, rgba(217,217,217,0.08) 0%, rgba(217,217,217,0) 100%)', 
+                  backdropFilter: 'blur(30px)' 
                 }}
               ></div>
 
@@ -125,10 +125,22 @@ export default function Home() {
             {/* Pricing Cards */}
             <div className="grid md:grid-cols-2 gap-6 relative">
               
-              {/* Floating Offer Badge */}
-              <div className="hidden md:flex absolute -right-16 top-1/4 flex-col items-center justify-center bg-yellow-100 rounded-full w-20 h-20 shadow-lg border border-yellow-200 z-20">
-                 <span className="text-xl">🎁</span>
-                 <span className="text-[8px] font-bold mt-1 leading-none text-center">Claim offer<br/><span className="text-red-600 bg-yellow-300 px-1 rounded-sm">10% off</span></span>
+              {/* Absolute Claim Offer Badge */}
+              <div className="absolute -right-4 md:-right-8 top-16 z-50 hidden md:flex flex-col items-center pointer-events-auto cursor-pointer transition hover:-translate-y-1" style={{ width: '90px' }}>
+                <div className="relative flex flex-col items-center w-full">
+                  {/* Gift Icon */}
+                  <img src="/gift.png" alt="Gift" className="w-[34px] h-[34px] relative z-10 translate-y-[6px] drop-shadow-md" />
+                  
+                  {/* White Pill */}
+                  <div className="bg-white border border-[#E3E3E3] rounded-[39px] w-[90px] h-[30px] flex items-center justify-center relative z-20" style={{ boxShadow: '0px 3px 6px 0px rgba(0,0,0,0.1), 0px 10px 10px 0px rgba(0,0,0,0.09), 0px 23px 14px 0px rgba(0,0,0,0.05)' }}>
+                    <span className="text-[11px] font-bold text-gray-900 leading-none">Claim offer</span>
+                  </div>
+                  
+                  {/* Yellow 10% Off Pill */}
+                  <div className="bg-[#FFC34B] rounded-[10px] px-2.5 py-1 absolute bottom-[-12px] z-30 shadow-sm">
+                    <span className="text-[10px] font-bold text-gray-900 leading-none block">10% off</span>
+                  </div>
+                </div>
               </div>
 
               {/* Card 1: Online Test Pack */}
