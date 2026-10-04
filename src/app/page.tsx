@@ -64,14 +64,14 @@ export default function Home() {
                 <div 
                   className="absolute z-10 pointer-events-none hidden md:block" 
                   style={{ 
-                    top: '34.43px', 
+                    top: '54.5px', 
                     left: '-257.84px', 
                     width: '1633.83px', 
                     height: '410.5px',
                     filter: 'drop-shadow(-182px 195px 49.1px rgba(0,0,0,0.5))' 
                   }}
                 >
-                  <img src="/swoosh-bg.png" alt="" className="w-full h-full object-fill" />
+                  <img src="/swoosh-bg.png" alt="" className="w-full h-full object-contain" />
                 </div>
 
                 <div className="relative z-20 w-[65%] md:w-[60%] text-left pt-2 pl-2 md:pl-2">
