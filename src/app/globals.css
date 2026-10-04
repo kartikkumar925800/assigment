@@ -1,14 +1,15 @@
-@import "tailwindcss";
+@import url('https://fonts.cdnfonts.com/css/aileron');
 
-@theme {
-  --color-brand-blue: #2857BF;
-  --color-brand-orange: #F06B27;
-  --color-brand-red: #C42701;
-  --color-bg-offwhite: #FAF9F6;
-  --color-dark-banner: #1E1E1E;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
 }
 
 body {
-  background-color: var(--color-bg-offwhite);
-  color: #333333;
+  font-family: 'Aileron', sans-serif;
 }
