@@ -64,7 +64,13 @@ export default function Home() {
                 }}
               >
                 {/* Grid & Blur Mask Background */}
-                <div className="absolute right-0 top-0 h-full w-[80%] md:w-[850px] z-0 overflow-hidden rounded-[24px] pointer-events-none">
+                <div 
+                  className="absolute right-0 top-0 h-full w-[80%] md:w-[850px] z-0 overflow-hidden rounded-[24px] pointer-events-none"
+                  style={{ 
+                    WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%)', 
+                    maskImage: 'linear-gradient(to right, transparent, black 15%)' 
+                  }}
+                >
                   <img src="/maskg.svg" alt="" className="w-full h-full object-cover object-right opacity-40 md:opacity-100 mix-blend-screen md:mix-blend-normal" />
                 </div>
 
@@ -142,7 +148,7 @@ export default function Home() {
               </div>
 
               {/* Card 1: Online Test Pack */}
-              <div className="bg-white rounded-[28px] border border-blue-100 overflow-hidden shadow-sm flex flex-col relative">
+              <div className="h-full bg-white rounded-[28px] border border-blue-100 overflow-hidden shadow-sm flex flex-col relative">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-300 to-blue-500"></div>
                 <div className="p-7 md:p-9 flex-grow">
                   <div className="flex gap-2 mb-4">
@@ -207,7 +213,7 @@ export default function Home() {
               </div>
 
               {/* Card 2: CBT Plus */}
-              <div className="bg-white rounded-[28px] border border-orange-200 overflow-hidden shadow-xl flex flex-col relative transform md:-translate-y-2 z-20">
+              <div className="h-full bg-white rounded-[28px] border border-orange-200 overflow-hidden shadow-xl flex flex-col relative z-20">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FFC34B] to-[#C42701]"></div>
                 <div className="p-7 md:p-9 flex-grow">
                   <div className="flex gap-2 mb-4">
