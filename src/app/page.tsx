@@ -124,16 +124,16 @@ export default function Home() {
                   {/* Features */}
                   <div className="space-y-6">
                     <div>
-                      <span className="bg-[#F06B27] text-white text-[10px] font-bold px-2.5 py-0.5 rounded inline-block mb-2.5">JEE पकड़ Test series</span>
+                      <span className="bg-[#F06B27] text-white text-[14px] font-bold leading-none px-3 py-1 rounded inline-block mb-2.5">JEE पकड़ Test series</span>
                       <p className="text-[15px] font-normal leading-none text-gray-700 flex items-center gap-2"><span className="text-black font-semibold text-[15px]">✓</span> 6 unit · 6 part tests · 22 full tests</p>
                     </div>
                     <div>
-                      <span className="bg-[#F06B27] text-white text-[10px] font-bold px-2.5 py-0.5 rounded inline-block mb-2.5">पढ़ाव Mock Tests</span>
+                      <span className="bg-[#F06B27] text-white text-[14px] font-bold leading-none px-3 py-1 rounded inline-block mb-2.5">पढ़ाव Mock Tests</span>
                       <p className="text-[15px] font-normal leading-none text-gray-700 flex items-center gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> 140+ Mock tests</p>
                       <p className="text-[15px] font-normal leading-none text-gray-700 flex items-center gap-2"><span className="text-black font-semibold text-[15px]">✓</span> 160+ PYQ tests</p>
                     </div>
                     <div>
-                      <span className="bg-[#F06B27] text-white text-[10px] font-bold px-2.5 py-0.5 rounded inline-block mb-2.5">आईना Sessions</span>
+                      <span className="bg-[#F06B27] text-white text-[14px] font-bold leading-none px-3 py-1 rounded inline-block mb-2.5">आईना Sessions</span>
                       <p className="text-[15px] font-normal leading-none text-gray-700 flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> AIR 1 Guidance Sessions</p>
                       <p className="text-[15px] font-normal leading-none text-gray-700 flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> Boards vs Competitive Exam Management</p>
                       <p className="text-[15px] font-normal leading-none text-gray-700 flex items-start gap-2"><span className="text-black font-semibold text-[15px]">✓</span> Weak Topic Sessions, Based on Your Tests</p>
@@ -180,9 +180,9 @@ export default function Home() {
                   </h4>
                   
                   <div className="relative mb-8 mt-2">
-                     <div className="bg-gradient-to-r from-[#FFC34B] via-[#F06B27] to-[#C42701] text-white text-[11px] font-bold py-1.5 px-6 inline-block rounded-r-md relative -left-7 md:-left-9 shadow-[6px_8px_8px_0px_rgba(0,0,0,0.1)] backdrop-blur-sm">
+                     <div className="bg-gradient-to-r from-[#FFC34B] via-[#F06B27] to-[#C42701] text-white text-[14px] font-bold leading-none py-2 px-6 inline-block rounded-r-md relative -left-7 md:-left-9 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.1)] backdrop-blur-sm flex items-center">
                        Nearest CBT Centre @ Patna
-                       <div className="absolute right-[-8px] top-[0] border-t-[14px] border-t-transparent border-b-[14px] border-b-transparent border-l-[8px] border-l-[#C42701]"></div>
+                       <div className="absolute right-[-8px] top-[0] border-t-[16px] border-t-transparent border-b-[16px] border-b-transparent border-l-[8px] border-l-[#C42701]"></div>
                      </div>
                      <div className="absolute right-0 top-0 bg-[#D32F2F] text-white text-[10px] font-bold py-1 px-3 rounded-full shadow-sm">
                        Battle Mode
@@ -192,16 +192,16 @@ export default function Home() {
                   {/* Features */}
                   <div className="space-y-6">
                     <div>
-                      <span className="bg-[#F06B27] text-white text-[10px] font-bold px-2.5 py-0.5 rounded inline-block mb-2.5">JEE पकड़ Test series</span>
+                      <span className="bg-[#F06B27] text-white text-[14px] font-bold leading-none px-3 py-1 rounded inline-block mb-2.5">JEE पकड़ Test series</span>
                       <p className="text-[15px] font-normal leading-none text-gray-700 flex items-center gap-2"><span className="text-black font-semibold text-[15px]">✓</span> 6 unit · 6 part tests · 22 full tests</p>
                     </div>
                     <div>
-                      <span className="bg-[#F06B27] text-white text-[10px] font-bold px-2.5 py-0.5 rounded inline-block mb-2.5">पढ़ाव Mock Tests</span>
+                      <span className="bg-[#F06B27] text-white text-[14px] font-bold leading-none px-3 py-1 rounded inline-block mb-2.5">पढ़ाव Mock Tests</span>
                       <p className="text-[15px] font-normal leading-none text-gray-700 flex items-center gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> 140+ Mock tests</p>
                       <p className="text-[15px] font-normal leading-none text-gray-700 flex items-center gap-2"><span className="text-black font-semibold text-[15px]">✓</span> 160+ PYQ tests</p>
                     </div>
                     <div>
-                      <span className="bg-[#F06B27] text-white text-[10px] font-bold px-2.5 py-0.5 rounded inline-block mb-2.5">आईना Sessions</span>
+                      <span className="bg-[#F06B27] text-white text-[14px] font-bold leading-none px-3 py-1 rounded inline-block mb-2.5">आईना Sessions</span>
                       <p className="text-[15px] font-normal leading-none text-gray-700 flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> AIR 1 Guidance Sessions</p>
                       <p className="text-[15px] font-normal leading-none text-gray-700 flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> Boards vs Competitive Exam Management</p>
                       <p className="text-[15px] font-normal leading-none text-gray-700 flex items-start gap-2"><span className="text-black font-semibold text-[15px]">✓</span> Weak Topic Sessions, Based on Your Tests</p>
