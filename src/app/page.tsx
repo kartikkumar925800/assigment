@@ -61,6 +61,20 @@ export default function Home() {
                   <img src="/maskg.svg" alt="" className="w-full h-full object-cover md:object-contain object-right opacity-40 md:opacity-100 mix-blend-screen md:mix-blend-normal" />
                 </div>
 
+                {/* Massive Desktop Background Swoosh */}
+                <div 
+                  className="absolute z-10 pointer-events-none hidden xl:block" 
+                  style={{ 
+                    top: '54.5px', 
+                    left: '-257.84px', 
+                    width: '1633.83px', 
+                    height: '410.5px',
+                    filter: 'drop-shadow(-182px 195px 49.1px rgba(0,0,0,0.5))' 
+                  }}
+                >
+                  <img src="/swoosh-bg.png" alt="" className="w-full h-full object-contain" />
+                </div>
+
                 <div className="relative z-20 w-[65%] md:w-[60%] text-left pt-2 pl-2 md:pl-2">
                   <h2 className="text-white font-black text-[18px] md:text-[28px] mb-1 md:mb-1 tracking-wide flex items-center leading-none">ME<span className="text-[#FF7800]">A</span>ITS</h2>
                   <h3 className="text-white text-[24px] md:text-[44px] font-bold mb-2 md:mb-3 leading-[1.1] tracking-tight">
