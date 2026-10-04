@@ -28,7 +28,10 @@ export default function Home() {
             <span className="text-gray-800 font-semibold text-[14.9px] tracking-tight">+91 74629 99520</span>
           </div>
           <button className="flex items-center justify-center bg-[#1EA651] rounded-full w-[44px] h-[34px] shadow-sm hover:opacity-90 transition">
-            <div className="w-[20px] h-[20px] bg-white rounded-full flex items-center justify-center text-[#1EA651] font-bold text-[12px]">W</div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-[20px] h-[20px] text-white">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+              <path d="M16.5 14.5c-.8.8-1.5.6-2.5 0-1.8-1-3-2.3-4-4-.6-.9-.8-1.6 0-2.4l1-1c.3-.3.3-.8 0-1l-2-3c-.3-.3-.8-.3-1 0l-1.5 1.5c-.4.4-.6 1-.5 1.5.2 1.3 1 3 2.5 4.5 1.5 1.5 3.2 2.3 4.5 2.5.5.1 1.1-.1 1.5-.5l1.5-1.5c.3-.3.3-.8 0-1l-3-2c-.2-.3-.7-.3-1 0z"/>
+            </svg>
           </button>
         </div>
       </nav>
@@ -38,16 +41,16 @@ export default function Home() {
         <div className="md:static sticky top-[72px] z-0" style={{ background: 'linear-gradient(180deg, #F5EFE4 0%, #D2C9B9 100%)', width: '100%' }}>
           <section className="max-w-[1300px] mx-auto pt-8 pb-12 px-4 relative">
             <div 
-              className="relative flex flex-col md:flex-row items-center justify-between p-8 md:p-14 min-h-[340px] shadow-2xl border border-white/5"
+              className="relative flex flex-col md:flex-row items-center justify-between p-8 md:p-14 min-h-[323px] shadow-2xl border border-white/5"
               style={{ 
                 background: 'radial-gradient(94.13% 130.56% at 50% 15.28%, #323232 0%, #090909 100%)',
-                borderRadius: '24px' 
+                borderRadius: '32px' 
               }}
             >
               
               {/* Grid Background - Positioned on the right */}
-              <div className="absolute right-0 top-0 w-[50%] h-full z-0 overflow-hidden rounded-r-[24px]">
-                 <img src="/grid-bg.svg" alt="" className="absolute right-0 top-0 w-full h-[150%] object-contain opacity-40 mix-blend-screen pointer-events-none transform translate-x-12 -translate-y-4" />
+              <div className="absolute right-[2%] top-[-10px] w-auto h-auto z-0 pointer-events-none hidden md:block">
+                 <img src="/teacher-bg.svg" alt="" className="w-auto h-[340px] object-contain opacity-90" />
               </div>
 
               <div className="relative z-20 md:w-[60%] text-left pt-6 pl-2 md:pl-8">
@@ -76,17 +79,7 @@ export default function Home() {
                  />
               </div>
               
-              {/* Frosted Glass Layer Behind Teacher */}
-              <div 
-                className="absolute right-[5%] bottom-0 z-10 hidden md:block"
-                style={{ 
-                  width: '500px', 
-                  height: '280px', 
-                  borderRadius: '120px 120px 0 0', 
-                  background: 'linear-gradient(180deg, rgba(217,217,217,0.08) 0%, rgba(217,217,217,0) 100%)', 
-                  backdropFilter: 'blur(30px)' 
-                }}
-              ></div>
+
 
               {/* Real Teacher Image - Breaking out of the box */}
               <div className="absolute bottom-[-80px] right-[5%] z-20 md:w-auto flex justify-end pointer-events-none">
