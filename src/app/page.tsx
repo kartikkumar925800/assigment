@@ -39,18 +39,15 @@ export default function Home() {
       {/* Sticky Mobile Hero Section (Scrolls behind the rest of the page) */}
       <div className="relative">
         <div className="md:static sticky top-[72px] z-0" style={{ background: 'linear-gradient(180deg, #F5EFE4 0%, #D2C9B9 100%)', width: '100%' }}>
-          <section className="max-w-[1300px] mx-auto pt-8 pb-12 px-4 relative">
+          <section className="max-w-[1440px] mx-auto py-10 px-4 xl:px-[159px] relative">
             <div 
-              className="relative flex flex-col md:flex-row items-center justify-between p-8 md:p-14 min-h-[323px] shadow-2xl border border-white/5"
-              style={{ 
-                background: 'radial-gradient(94.13% 130.56% at 50% 15.28%, #323232 0%, #090909 100%)',
-                borderRadius: '32px' 
-              }}
+              className="relative flex flex-col md:flex-row items-center justify-between p-8 md:p-14 min-h-[323px] w-full max-w-[1122px] mx-auto shadow-2xl rounded-[32px]"
+              style={{ background: 'radial-gradient(94.13% 130.56% at 50% 15.28%, #323232 0%, #090909 100%)' }}
             >
               
-              {/* Grid Background - Positioned on the right */}
-              <div className="absolute right-[2%] top-[-10px] w-auto h-auto z-0 pointer-events-none hidden md:block">
-                 <img src="/teacher-bg.svg" alt="" className="w-auto h-[340px] object-contain opacity-90" />
+              {/* Full SVG Background (Includes gradient, border, grid, and blur mask) */}
+              <div className="absolute inset-0 z-0 rounded-[32px] pointer-events-none hidden md:block">
+                 <img src="/teacher-bg.svg" alt="" className="absolute -top-[14px] -left-[75px] w-[1272px] h-[599px] max-w-none object-cover" />
               </div>
 
               <div className="relative z-20 md:w-[60%] text-left pt-6 pl-2 md:pl-8">
