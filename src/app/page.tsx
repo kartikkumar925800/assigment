@@ -103,6 +103,7 @@ export default function Home() {
                    />
                 </div>
               </div>
+            </div>
           </section>
       </div>
 
@@ -337,7 +338,6 @@ export default function Home() {
             </p>
           </section>
         </div>
-      </div>
     </div>
   );
 }
