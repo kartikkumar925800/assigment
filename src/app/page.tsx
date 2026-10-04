@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div className="min-h-[150vh] bg-[#F5EFE4] text-gray-900 pb-20">
       {/* Sticky Navbar */}
-      <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-[#F5EFE4] border-b border-gray-200 shadow-sm">
+      <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-[#F5EFE4] transition-all">
         <div className="flex items-center gap-2">
           {/* Logo Placeholder */}
           <div className="flex items-center">
@@ -38,7 +38,7 @@ export default function Home() {
       {/* Sticky Mobile Hero Section (Scrolls behind the rest of the page) */}
       <div className="relative">
         <div className="md:static sticky top-[72px] z-0" style={{ background: 'linear-gradient(180deg, #F5EFE4 0%, #D2C9B9 100%)', width: '100%' }}>
-          <section className="max-w-[1440px] mx-auto pt-[80px] pb-[40px] md:pt-[150px] md:pb-[80px] px-4 xl:px-[159px] relative z-0">
+          <section className="max-w-[1440px] mx-auto pt-[40px] pb-[40px] md:pt-[60px] md:pb-[20px] px-4 xl:px-[159px] relative z-0">
             
             {/* Outer Black Card */}
             <div 
@@ -93,7 +93,7 @@ export default function Home() {
                 </div>
                 
                 {/* Real Teacher Image - Breaking out of the box */}
-                <div className="absolute bottom-[-10px] md:bottom-[-12px] -right-[10px] md:right-[5%] z-20 w-[220px] md:w-[380px] flex justify-end pointer-events-none">
+                <div className="absolute bottom-[-15px] md:bottom-[-40px] -right-[15px] md:-right-[20px] z-30 w-[220px] md:w-[320px] flex justify-end pointer-events-none">
                    <Image 
                      src="/teacher.png" 
                      alt="Mr. Anand Jaiswal" 
