@@ -64,8 +64,8 @@ export default function Home() {
                 }}
               >
                 {/* Grid & Blur Mask Background */}
-                <div className="absolute right-0 top-0 h-full w-[80%] md:w-[727px] z-0 overflow-hidden rounded-[24px] pointer-events-none">
-                  <img src="/maskg.svg" alt="" className="w-full h-full object-cover object-left opacity-40 md:opacity-100 mix-blend-screen md:mix-blend-normal" />
+                <div className="absolute right-0 top-0 h-full w-[80%] md:w-[850px] z-0 overflow-hidden rounded-[24px] pointer-events-none">
+                  <img src="/maskg.svg" alt="" className="w-full h-full object-cover object-right opacity-40 md:opacity-100 mix-blend-screen md:mix-blend-normal" />
                 </div>
 
 
