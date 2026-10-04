@@ -38,10 +38,11 @@ export default function Home() {
       {/* Sticky Mobile Hero Section (Scrolls behind the rest of the page) */}
       <div className="relative">
         <div className="md:static sticky top-[72px] z-0" style={{ background: 'linear-gradient(180deg, #F5EFE4 0%, #D2C9B9 100%)', width: '100%' }}>
-          <section className="max-w-[1440px] mx-auto py-6 md:py-10 px-4 xl:px-[159px] relative">
+          <section className="max-w-[1440px] mx-auto pt-[80px] pb-[40px] md:pt-[150px] md:pb-[80px] px-4 xl:px-[159px] relative z-0">
+            
             {/* Outer Black Card */}
             <div 
-              className="relative w-full max-w-[1122px] mx-auto rounded-[27px] md:rounded-[32px] p-[6.75px] pb-[10px] md:p-[8px] md:pb-[12px]"
+              className="relative w-full max-w-[1122px] mx-auto rounded-[27px] md:rounded-[32px] p-[6.75px] pb-[10px] md:p-[8px] md:pb-[12px] z-10"
               style={{ 
                 background: '#090909',
                 boxShadow: '0px 12px 26px 0px rgba(0,0,0,0.1), 0px 47px 47px 0px rgba(0,0,0,0.09), 0px 105px 63px 0px rgba(0,0,0,0.05), 0px 187px 75px 0px rgba(0,0,0,0.01)'
@@ -57,13 +58,13 @@ export default function Home() {
               >
                 
                 {/* Grid & Blur Mask Background */}
-                <div className="absolute right-0 top-0 h-full w-full md:w-[727px] z-0 overflow-hidden rounded-[24px] pointer-events-none">
+                <div className="absolute right-0 top-0 h-full w-[80%] md:w-[480px] z-0 overflow-hidden rounded-[24px] pointer-events-none">
                   <img src="/maskg.svg" alt="" className="w-full h-full object-cover md:object-contain object-right opacity-40 md:opacity-100 mix-blend-screen md:mix-blend-normal" />
                 </div>
 
                 {/* Massive Desktop Background Swoosh */}
                 <div 
-                  className="absolute z-10 pointer-events-none hidden xl:block" 
+                  className="absolute z-10 pointer-events-none hidden md:block" 
                   style={{ 
                     top: '54.5px', 
                     left: '-257.84px', 
@@ -92,7 +93,7 @@ export default function Home() {
                 </div>
                 
                 {/* Real Teacher Image - Breaking out of the box */}
-                <div className="absolute bottom-[-15px] md:bottom-[-80px] -right-[10px] md:right-[5%] z-20 w-[180px] md:w-auto flex justify-end pointer-events-none">
+                <div className="absolute bottom-[-10px] md:bottom-[-12px] -right-[10px] md:right-[5%] z-20 w-[220px] md:w-[380px] flex justify-end pointer-events-none">
                    <Image 
                      src="/teacher.png" 
                      alt="Mr. Anand Jaiswal" 
