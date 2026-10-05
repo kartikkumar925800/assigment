@@ -447,8 +447,8 @@ function FeatureGroup({ f, defaultTickColor = "#000000" }: { f: FeatureGroupData
           return (
             <div key={it} className={`flex flex-row items-start w-full ${f.label === "Also Includes" ? "pl-[16px] md:pl-0" : ""}`}>
               <div className="hidden md:flex flex-shrink-0 items-center justify-center mr-[8px] mt-[3px]">
-                <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1 4L4.5 7.5L11 1" stroke={tickColor} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 5.5L4.5 8.5L10.5 1.5" stroke={tickColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
               <span className="w-full whitespace-pre-wrap text-[#000000] text-[15px] font-semibold leading-[18px]">
@@ -674,10 +674,10 @@ function RoadmapSection() {
           />
           {/* Use bottom anchorage so it never overlaps the bottom graphics */}
           <div
-            className="absolute flex w-full flex-col items-center gap-[8px]"
+            className="absolute flex w-full flex-col items-center gap-[6px]"
             style={{ left: "50%", bottom: "22px", transform: "translate(-50%, 0)" }}
           >
-          <div className="flex w-[85%] max-w-[230px] h-[48px] items-center gap-[6px] rounded-[36px] bg-white/[0.08] px-[16px] backdrop-blur-[41.85px]">
+          <div className="flex w-[85%] max-w-[230px] h-[44px] items-center gap-[6px] rounded-[36px] bg-white/[0.08] px-[16px] backdrop-blur-[41.85px]">
             <span className="font-['Inter',sans-serif] text-[13px] font-bold leading-[24px] text-white">
               +91
             </span>
@@ -688,7 +688,7 @@ function RoadmapSection() {
               aria-label="10-digit mobile number"
             />
           </div>
-          <button className="flex h-[40px] w-[92%] max-w-[256px] items-center justify-center gap-[12px] rounded-[36px] bg-[#FA7602] px-[12px] py-[8px]">
+          <button className="flex h-[38px] w-[92%] max-w-[256px] items-center justify-center gap-[12px] rounded-[36px] bg-[#FA7602] px-[12px] py-[8px]">
             <span className="whitespace-nowrap font-['Inter',sans-serif] text-[14px] font-semibold leading-[19.364px] text-white">
               Get Your RoadMap
             </span>
