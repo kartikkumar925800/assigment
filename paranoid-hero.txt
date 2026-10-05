@@ -1,0 +1,24 @@
+--- NODE: Frame 11 (131:649) ---
+Bounds: w=1440, h=403, x=11070, y=69
+Fills: [{"blendMode":"NORMAL","type":"GRADIENT_LINEAR","gradientHandlePositions":[{"x":0.4999999566863723,"y":0},{"x":0.4999999566863723,"y":1},{"x":0.4545823262553957,"y":0}],"gradientStops":[{"color":{"r":0.9607843160629272,"g":0.9372549057006836,"b":0.8941176533699036,"a":1},"position":0},{"color":{"r":0.8221153616905212,"g":0.7886354923248291,"b":0.7272559404373169,"a":1},"position":1}]}]
+Interactions: []
+--- NODE: Frame 11 / Grid bg (131:842) ---
+Bounds: w=935, h=264.4373474121094, x=10989, y=157.93466186523438
+Interactions: []
+--- NODE: Frame 11 / Grid bg (131:1015) ---
+Bounds: w=935, h=264.4373474121094, x=11605, y=127.9346694946289
+Interactions: []
+--- NODE: Frame 11 / Frame 1000005102 (131:787) ---
+Bounds: w=1122, h=323, x=11229, y=108.9346694946289
+Effects: [{"type":"DROP_SHADOW","visible":true,"color":{"r":0,"g":0,"b":0,"a":0.10000000149011612},"blendMode":"NORMAL","offset":{"x":0,"y":12},"radius":26,"showShadowBehindNode":true},{"type":"DROP_SHADOW","visible":true,"color":{"r":0,"g":0,"b":0,"a":0.09000000357627869},"blendMode":"NORMAL","offset":{"x":0,"y":47},"radius":47,"showShadowBehindNode":true},{"type":"DROP_SHADOW","visible":true,"color":{"r":0,"g":0,"b":0,"a":0.05000000074505806},"blendMode":"NORMAL","offset":{"x":0,"y":105},"radius":63,"showShadowBehindNode":true},{"type":"DROP_SHADOW","visible":true,"color":{"r":0,"g":0,"b":0,"a":0.009999999776482582},"blendMode":"NORMAL","offset":{"x":0,"y":187},"radius":75,"showShadowBehindNode":true},{"type":"DROP_SHADOW","visible":true,"color":{"r":0,"g":0,"b":0,"a":0},"blendMode":"NORMAL","offset":{"x":0,"y":292},"radius":82,"showShadowBehindNode":true}]
+Fills: [{"blendMode":"NORMAL","type":"SOLID","color":{"r":0.03529411926865578,"g":0.03529411926865578,"b":0.03529411926865578,"a":1}}]
+Interactions: []
+--- NODE: Frame 11 / Vector 2 (131:783) ---
+Bounds: w=1633.83740234375, h=410.5, x=10979.1630859375, y=171.43466186523438
+Effects: [{"type":"DROP_SHADOW","visible":true,"color":{"r":0,"g":0,"b":0,"a":0.5},"blendMode":"NORMAL","offset":{"x":-182,"y":195},"radius":49.099998474121094,"showShadowBehindNode":false}]
+Interactions: []
+--- NODE: Frame 11 / Image (211:8289) ---
+Bounds: w=281, h=391, x=12047, y=81.06533813476562
+Effects: [{"type":"DROP_SHADOW","visible":true,"color":{"r":0,"g":0,"b":0,"a":0.25},"blendMode":"NORMAL","offset":{"x":10,"y":23},"radius":24,"showShadowBehindNode":false}]
+Fills: [{"blendMode":"NORMAL","visible":false,"type":"IMAGE","scaleMode":"FILL","imageRef":"7e33c7422a27b86f58bfb51b909e4f56fd11cf23"},{"blendMode":"NORMAL","type":"IMAGE","scaleMode":"STRETCH","imageRef":"a5498cbf5a9d31e671f3dc6d352c031af9b0b48d","imageTransform":[[0.4927632510662079,-7.050462370567156e-18,0.25361838936805725],[-1.2682657406463141e-17,0.927735447883606,-1.942890293094024e-16]]}]
+Interactions: []

@@ -1,0 +1,51 @@
+{
+  "id": "131:842",
+  "name": "Grid bg",
+  "type": "FRAME",
+  "scrollBehavior": "SCROLLS",
+  "children": [],
+  "blendMode": "PASS_THROUGH",
+  "clipsContent": true,
+  "background": [],
+  "fills": [],
+  "strokes": [],
+  "strokeWeight": 0.7014253735542297,
+  "strokeAlign": "INSIDE",
+  "backgroundColor": {
+    "r": 0,
+    "g": 0,
+    "b": 0,
+    "a": 0
+  },
+  "absoluteBoundingBox": {
+    "x": 10989,
+    "y": 157.93466186523438,
+    "width": 935,
+    "height": 264.4373474121094
+  },
+  "absoluteRenderBounds": {
+    "x": 11070,
+    "y": 157.93466186523438,
+    "width": 854,
+    "height": 264.4373474121094
+  },
+  "constraints": {
+    "vertical": "BOTTOM",
+    "horizontal": "LEFT"
+  },
+  "exportSettings": [
+    {
+      "suffix": "",
+      "format": "PNG",
+      "constraint": {
+        "type": "SCALE",
+        "value": 1
+      }
+    }
+  ],
+  "effects": [],
+  "interactions": [],
+  "complexStrokeProperties": {
+    "strokeType": "BASIC"
+  }
+}

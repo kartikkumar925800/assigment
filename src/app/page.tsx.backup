@@ -238,7 +238,7 @@ function RibbonShape({ right }: { right: boolean }) {
         viewBox="2 0 279 29"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="pointer-events-none absolute left-0 top-0 overflow-visible block"
+        className="pointer-events-none absolute left-0 top-0 overflow-visible"
       >
         <defs>
           <linearGradient
@@ -273,7 +273,7 @@ function RibbonShape({ right }: { right: boolean }) {
       viewBox="2 0 253 29"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="pointer-events-none absolute left-0 top-0 overflow-visible block"
+      className="pointer-events-none absolute left-0 top-0 overflow-visible"
     >
       <defs>
         <linearGradient
@@ -333,23 +333,17 @@ function Ribbon({
   right: boolean;
 }) {
   return (
-    <div className="md:absolute md:top-[137.995308px] md:left-0 relative w-full h-[29px] md:h-auto mt-[-22px] md:mt-0 z-10">
-      <div
-        className="absolute z-10 block h-[29px] backdrop-blur-[4px] drop-shadow-[6px_8px_8px_rgba(0,0,0,0.1)] left-[var(--mobile-left)] md:left-[var(--desktop-left)]"
-        style={{ 
-          width: `${width}px`, 
-          "--mobile-left": `calc(-18px + ${left}px)`,
-          "--desktop-left": `${left}px` 
-        } as React.CSSProperties}
+    <div
+      className="absolute z-10 h-[29px] backdrop-blur-[4px] drop-shadow-[6px_8px_8px_rgba(0,0,0,0.1)]"
+      style={{ left: `${left}px`, top: "137.995308px", width: `${width}px` }}
+    >
+      <RibbonShape right={right} />
+      <span
+        className="absolute top-[6.004692px] whitespace-nowrap text-white text-[14px] font-bold leading-[16.8px] [text-shadow:0px_4px_4px_rgba(0,0,0,0.1)]"
+        style={{ left: `${textLeft}px` }}
       >
-        <RibbonShape right={right} />
-        <span
-          className="absolute top-[6.004692px] block whitespace-nowrap text-white text-[14px] font-bold leading-[16.8px] [text-shadow:0px_4px_4px_rgba(0,0,0,0.1)]"
-          style={{ left: `${textLeft}px` }}
-        >
-          {text}
-        </span>
-      </div>
+        {text}
+      </span>
     </div>
   );
 }
@@ -368,7 +362,7 @@ function ModeBadge({
   return (
     <div
       className={
-        "absolute top-[139.93px] z-10 hidden justify-center items-center gap-[10px] rounded-[37px] px-[12px] py-[4px] md:flex " +
+        "absolute top-[139.93px] z-10 flex justify-center items-center gap-[10px] rounded-[37px] px-[12px] py-[4px] " +
         (inner ? "shadow-[inset_0px_0px_8px_#FF8E78]" : "")
       }
       style={{ left: `${left}px`, backgroundColor: bg }}
@@ -422,20 +416,16 @@ function Tags({ tags }: { tags: string[] }) {
   );
 }
 
-function FeatureGroup({ f, defaultTickColor = "#000000" }: { f: FeatureGroupData; defaultTickColor?: string }) {
+function FeatureGroup({ f }: { f: FeatureGroupData }) {
   return (
     <div className="flex flex-col w-full gap-[4px]">
       <div
-        className={`flex justify-center items-center self-start gap-[10px] rounded-[8px] ${
-          f.label === "Also Includes" ? "px-0 py-0 md:px-[6px] md:py-[2px] bg-transparent md:bg-[#F5EFE4]" : "px-[6px] py-[2px]"
-        }`}
-        style={f.label === "Also Includes" ? undefined : { backgroundColor: f.badgeBg }}
+        className="flex justify-center items-center self-start gap-[10px] rounded-[8px] px-[6px] py-[2px]"
+        style={{ backgroundColor: f.badgeBg }}
       >
         <span
-          className={`${f.badgeSize} ${f.badgeWeight} ${f.badgeLeading} ${
-            f.label === "Also Includes" ? "text-[#808080] md:text-[#303030]" : ""
-          }`}
-          style={f.label === "Also Includes" ? undefined : { color: f.badgeColor }}
+          className={`${f.badgeSize} ${f.badgeWeight} ${f.badgeLeading}`}
+          style={{ color: f.badgeColor }}
         >
           {f.label}
         </span>
@@ -443,12 +433,12 @@ function FeatureGroup({ f, defaultTickColor = "#000000" }: { f: FeatureGroupData
       <div className="flex w-full flex-col gap-[4px]">
         {f.items.map((it) => {
           const isCBT = it.includes("Centre-Based");
-          const tickColor = isCBT ? "#E63B18" : defaultTickColor;
+          const tickColor = isCBT ? "#E63B18" : "#000000";
           return (
-            <div key={it} className={`flex flex-row items-start w-full ${f.label === "Also Includes" ? "pl-[16px] md:pl-0" : ""}`}>
-              <div className="hidden md:flex flex-shrink-0 items-center justify-center mr-[8px] mt-[1px]">
-                <span style={{ color: tickColor }} className="text-[14px] font-bold leading-none">✓</span>
-              </div>
+            <div key={it} className="flex flex-row items-start w-full">
+              <span className="text-[15px] font-normal leading-[18px] mr-[8px]" style={{ color: tickColor }}>
+                ✓
+              </span>
               <span className="w-full whitespace-pre-wrap text-[#000000] text-[15px] font-semibold leading-[18px]">
                 {it}
               </span>
@@ -460,29 +450,16 @@ function FeatureGroup({ f, defaultTickColor = "#000000" }: { f: FeatureGroupData
   );
 }
 
-function PriceFooter({ price, original, mobilePrice, mobileOriginal }: { price: string; original: string; mobilePrice?: string; mobileOriginal?: string }) {
-  const mPrice = mobilePrice || price;
-  const mOrig = mobileOriginal || original;
-
+function PriceFooter({ price, original }: { price: string; original: string }) {
   return (
-    <div className="relative w-full h-auto md:h-[87px] rounded-b-[24px] bg-[#1A1A1A] flex flex-row md:block justify-between items-center px-[20px] py-[16px] md:p-0 gap-[16px] md:gap-0">
-      {/* Price block */}
-      <div className="md:absolute md:left-[41px] md:top-[15px] flex flex-col gap-[2px]">
-        {/* Mobile Price */}
-        <span className="w-full text-[#FF7800] text-[24px] font-bold leading-[28.8px] md:hidden">
-          {mPrice}
-        </span>
-        {/* Desktop Price */}
-        <span className="w-full text-[#FF7800] text-[24px] font-bold leading-[28.8px] hidden md:block">
+    <div className="relative w-full h-[87px] rounded-b-[24px] bg-[#1A1A1A]">
+      {/* Frame 1000005490 — 157x49 at (41, 15) */}
+      <div className="absolute left-[41px] top-[15px] flex w-[157px] flex-col gap-[2px]">
+        <span className="w-full text-[#FF7800] text-[24px] font-bold leading-[28.8px]">
           {price}
         </span>
-        <div className="flex w-full flex-row items-center gap-[8px]">
-          {/* Mobile Original */}
-          <span className="text-white text-[13px] font-semibold leading-[18.2px] line-through md:hidden">
-            {mOrig}
-          </span>
-          {/* Desktop Original */}
-          <span className="text-white text-[13px] font-semibold leading-[18.2px] line-through hidden md:inline">
+        <div className="flex w-full flex-row gap-[8px]">
+          <span className="text-white text-[13px] font-semibold leading-[18.2px]">
             {original}
           </span>
           <span className="whitespace-nowrap text-white text-[13px] font-semibold leading-[18.2px] opacity-60">
@@ -490,17 +467,16 @@ function PriceFooter({ price, original, mobilePrice, mobileOriginal }: { price: 
           </span>
         </div>
       </div>
-      {/* Buttons block */}
-      <div className="md:absolute md:right-[25.5px] md:top-[23px] flex flex-row items-center gap-[8px] w-auto">
-        <button className="hidden md:flex justify-center items-center gap-[10px] rounded-[10px] px-[14px] py-[8px] shadow-[0_0_0_1px_rgba(255,255,255,0.2)]">
+      {/* Frame 1000005602 — 206x37 at right 25.5 / top 23 */}
+      <div className="absolute right-[25.5px] top-[23px] flex flex-row items-center gap-[8px]">
+        <button className="flex justify-center items-center gap-[10px] rounded-[10px] px-[14px] py-[8px] shadow-[0_0_0_1px_rgba(255,255,255,0.2)]">
           <span className="whitespace-nowrap text-white text-[15px] font-semibold leading-[21px]">
             View Details
           </span>
         </button>
         <button className="flex justify-center items-center gap-[10px] rounded-[10px] bg-white px-[14px] py-[8px]">
           <span className="whitespace-nowrap text-[#090909] text-[15px] font-semibold leading-[21px]">
-            <span className="md:hidden">View Details</span>
-            <span className="hidden md:inline">Register</span>
+            Register
           </span>
         </button>
       </div>
@@ -515,8 +491,6 @@ type CardProps = {
   benefits: { timing: string; detail: string; bottomClass: string };
   price: string;
   original: string;
-  mobilePrice?: string;
-  mobileOriginal?: string;
   ribbon: { text: string; left: number; width: number; textLeft: number };
   badge: { text: string; left: number; bg: string; inner?: boolean };
 };
@@ -528,63 +502,52 @@ function PriceCard({
   benefits,
   price,
   original,
-  mobilePrice,
-  mobileOriginal,
   ribbon,
   badge,
 }: CardProps) {
   const right = stroke === "#E1451F";
   return (
-    <div className="relative flex w-full md:w-[540.5px] md:h-[711.2px] flex-col">
-      {/* Frame 1000005298 / Frame 1000005303 — r24, #FFFFFF */}
+    <div className="relative flex h-[711.2px] w-[540.5px] flex-col">
+      {/* Frame 1000005298 / Frame 1000005303 — 540.5x711.2, r24, #FFFFFF */}
       <div className="flex w-full flex-1 flex-col rounded-[24px] bg-white">
-           {/* Frame 1000005485 — gap 33/24 on mobile, pad 18 vs 41/25, 1.2px inset stroke */}
-           <div
-            className="flex h-auto md:h-[624.2px] w-full flex-col gap-[24px] md:gap-[33px] rounded-t-[24px] px-[18px] md:px-[42.2px] pt-[18px] md:pt-[25.2px] pb-[18px] md:pb-[24px]"
-            style={{ boxShadow: `inset 1.2px 0 0 0 ${stroke}, inset -1.2px 0 0 0 ${stroke}, inset 0 1.2px 0 0 ${stroke}` }}
+          {/* Frame 1000005485 — 540.5x624.2, gap 33, 1.2px inset stroke counted in layout */}
+          <div
+            className="flex h-[624.2px] w-full flex-col gap-[33px] rounded-t-[24px] px-[42.2px] pt-[25.2px] pb-[24px]"
+            style={{ boxShadow: `inset 0 0 0 1.2px ${stroke}` }}
           >
-          {/* Frame 1000005484 — header, gap 2, pb 24/8 on mobile, h 116 vs 126 */}
-          <div className="flex w-full flex-col gap-[2px] pb-[8px] md:pb-[24px]">
+          {/* Frame 1000005484 — header, gap 2, pb 24, height 126 */}
+          <div className="flex w-full flex-col gap-[2px] pb-[24px]">
             <Tags tags={tags} />
-            <h3 className="w-full text-[#000000] text-[22px] md:text-[24px] font-bold leading-[27.5px] md:leading-[30px]">
+            <h3 className="w-full text-[#000000] text-[24px] font-bold leading-[30px]">
               JEE Main + Advanced 2027
             </h3>
             {right ? (
+              /* Frame 1000005488 — Inter 700 "CBT Plus +" + Aileron 700 span */
               <div className="flex w-full flex-row items-center gap-[4px]">
                 <span
-                  className="whitespace-nowrap bg-clip-text font-['Inter',sans-serif] text-[22px] md:text-[24px] font-bold leading-[23.1px] md:leading-[25.2px] text-transparent bg-gradient-to-r from-[#F08E1D] via-[#EF6718] to-[#DD141E]"
+                  className="whitespace-nowrap bg-clip-text font-['Inter',sans-serif] text-[24px] font-bold leading-[25.2px] text-transparent bg-gradient-to-r from-[#F08E1D] via-[#EF6718] to-[#DD141E]"
                 >
                   CBT Plus +
                 </span>
                 <span
-                  className="whitespace-nowrap bg-clip-text text-[22px] md:text-[24px] font-bold leading-[27.5px] md:leading-[30px] text-transparent bg-gradient-to-r from-[#5B8FFF] via-[#3D74EB] to-[#234285]"
+                  className="whitespace-nowrap bg-clip-text text-[24px] font-bold leading-[30px] text-transparent bg-gradient-to-r from-[#5B8FFF] via-[#3D74EB] to-[#234285]"
                 >
                   Online Test Pack
                 </span>
               </div>
             ) : (
               <span
-                className="w-full bg-clip-text text-[22px] md:text-[24px] font-bold leading-[27.5px] md:leading-[30px] text-transparent bg-gradient-to-r from-[#5B8FFF] via-[#3D74EB] to-[#234285]"
+                className="w-full bg-clip-text text-[24px] font-bold leading-[30px] text-transparent bg-gradient-to-r from-[#5B8FFF] via-[#3D74EB] to-[#234285]"
               >
                 Online Test Pack
               </span>
             )}
           </div>
 
-          <Ribbon
-            text={ribbon.text}
-            left={ribbon.left}
-            width={ribbon.width}
-            textLeft={ribbon.textLeft}
-            right={right}
-          />
-
-          {/* Frame 1000005483 — gap 12px mobile / 16px desktop, pt 4px mobile / 16px desktop */}
-          <div className="flex w-full flex-col items-start md:items-end gap-[12px] md:gap-[16px] pt-[4px] md:pt-[16px] flex-1">
+          {/* Frame 1000005483 — gap 16, pt 16, items-end */}
+          <div className="flex w-full flex-col items-end gap-[16px] pt-[16px]">
             {features.map((f) => (
-              <div key={f.label} className={`w-full ${f.label === "Also Includes" ? "pt-[8px]" : ""}`}>
-                <FeatureGroup f={f} defaultTickColor="#111111" />
-              </div>
+              <FeatureGroup key={f.label} f={f} />
             ))}
           </div>
 
@@ -601,9 +564,16 @@ function PriceCard({
           </div>
         </div>
 
-        <PriceFooter price={price} original={original} mobilePrice={mobilePrice} mobileOriginal={mobileOriginal} />
+        <PriceFooter price={price} original={original} />
       </div>
 
+      <Ribbon
+        text={ribbon.text}
+        left={ribbon.left}
+        width={ribbon.width}
+        textLeft={ribbon.textLeft}
+        right={right}
+      />
       <ModeBadge text={badge.text} left={badge.left} bg={badge.bg} inner={badge.inner} />
     </div>
   );
@@ -611,90 +581,47 @@ function PriceCard({
 
 /* ------------------------------------------------------------------ *
  * Roadmap Banner — static background + precise input overlay.
- * Desktop: 1440x249 via roadmap-bg.png (aspectRatio 1440/249).
- * Mobile : 363x257 via roadmap-mobile.png; input positioned at
- *          937.5/1440×100% and 115/249×100% of the 1440 container.
+ * Dark banner (1109x229) is baked into /assets/roadmap-bg.png (centered in
+ * 1440 at y=59). Frame 1000005591 ("+91" + CTA) is at 4914x1543 on the
+ * banner, i.e. 772+56 on the banner → 937.5+115 on the 1440 container.
  * ------------------------------------------------------------------ */
 function RoadmapSection() {
   return (
-    <>
-      {/* Desktop — 1440x249 */}
-      <section
-        className="relative hidden w-full max-w-[1440px] md:block"
-        style={{ aspectRatio: "1440/249" }}
+    <section
+      className="relative w-full max-w-[1440px] pb-[100px]"
+      style={{ aspectRatio: "1440/249" }}
+    >
+      <Image
+        src="/assets/roadmap-bg.png"
+        fill
+        alt="Get a free Roadmap"
+        className="object-contain"
+        priority
+      />
+      {/* Frame 1000005591 — Phone Input + CTA — 265x104 gap-9 @ 937.5,115 */}
+      <div
+        className="absolute flex w-[265px] flex-col gap-[9px]"
+        style={{ left: "65.104%", top: "46.184%" }}
       >
-        <Image
-          src="/assets/roadmap-bg.png"
-          fill
-          alt="Get a free Roadmap"
-          className="object-contain"
-          priority
-        />
-        <div
-          className="absolute flex w-[18.4%] max-w-[265px] flex-col gap-[9px] pb-[100px]"
-          style={{ left: "65.104%", top: "46.184%" }}
-        >
-          <div className="flex h-[48px] w-full items-center gap-[8px] rounded-[36px] border border-white/[0.13] bg-white/[0.15] px-[20px] backdrop-blur-[41.85px]">
-            <span className="font-['Inter',sans-serif] text-[15px] font-bold leading-[24px] text-white">
-              +91
-            </span>
-            <input
-              type="tel"
-              placeholder="10-digit mobile number"
-              className="w-full bg-transparent font-['Inter',sans-serif] text-[16px] font-medium leading-[19.364px] text-white placeholder-white/40 focus:outline-none"
-              aria-label="10-digit mobile number"
-            />
-          </div>
-          <button className="flex h-[45px] w-full items-center justify-center gap-[12px] rounded-[36px] bg-[#FA7602] px-[12px] py-[16px]">
-            <span className="whitespace-nowrap font-['Inter',sans-serif] text-[16px] font-semibold leading-[19.364px] text-white">
-              Get Your RoadMap
-            </span>
-          </button>
-        </div>
-      </section>
-      {/* Mobile — 363x257, input overlay via percentages so it scales fluidly */}
-      {/* Mobile — 363x257, centered with max width so it perfectly fits like Figma without blowing up full width */}
-      <section className="relative flex w-full justify-center md:hidden pt-[16px] pb-[48px]">
-        {/* Split Background to support transparent overlapping blobs */}
-        <div className="absolute inset-0 flex flex-col z-0">
-          <div className="w-full bg-white flex-1" />
-          <div className="w-full bg-[#f5efe4] flex-1" />
-        </div>
-        <div className="relative w-full max-w-[412px] z-10">
-          <Image
-            src="/assets/roadmap-mobile.png"
-            width={412}
-            height={280}
-            alt="Get a free Roadmap"
-            className="w-full h-auto"
-            priority
-            unoptimized
+        {/* Phone Input — Real HTML input */}
+        <div className="flex h-[48px] w-[265px] items-center gap-[8px] rounded-[36px] border border-white/[0.13] bg-white/[0.15] px-[20px] backdrop-blur-[41.85px]">
+          <span className="font-['Inter',sans-serif] text-[15px] font-bold leading-[24px] text-white">
+            +91
+          </span>
+          <input 
+            type="tel"
+            placeholder="10-digit mobile number"
+            className="w-full bg-transparent font-['Inter',sans-serif] text-[16px] font-medium leading-[19.364px] text-white placeholder-white/40 focus:outline-none"
           />
-          {/* Use bottom anchorage so it never overlaps the bottom graphics */}
-          <div
-            className="absolute flex w-full flex-col items-center gap-[8px]"
-            style={{ left: "50%", bottom: "22px", transform: "translate(-50%, 0)" }}
-          >
-          <div className="flex w-[85%] max-w-[230px] h-[48px] items-center gap-[6px] rounded-[36px] bg-white/[0.08] px-[16px] backdrop-blur-[41.85px]">
-            <span className="font-['Inter',sans-serif] text-[13px] font-bold leading-[24px] text-white">
-              +91
-            </span>
-            <input
-              type="tel"
-              placeholder="10-digit mobile number"
-              className="w-full bg-transparent font-['Inter',sans-serif] text-[13px] font-medium leading-[19.364px] text-white placeholder-white/40 focus:outline-none"
-              aria-label="10-digit mobile number"
-            />
-          </div>
-          <button className="flex h-[40px] w-[92%] max-w-[256px] items-center justify-center gap-[12px] rounded-[36px] bg-[#FA7602] px-[12px] py-[8px]">
-            <span className="whitespace-nowrap font-['Inter',sans-serif] text-[14px] font-semibold leading-[19.364px] text-white">
-              Get Your RoadMap
-            </span>
-          </button>
         </div>
-        </div>
-      </section>
-    </>
+        {/* CTA — 265x45 r36 bg #FA7602 */}
+        <button className="flex h-[45px] w-[265px] items-center justify-center gap-[12px] rounded-[36px] bg-[#FA7602] px-[12px] py-[16px] hover:opacity-90 transition">
+          <span className="whitespace-nowrap font-['Inter',sans-serif] text-[16px] font-semibold leading-[19.364px] text-white">
+            Get Your RoadMap
+          </span>
+        </button>
+      </div>
+    </section>
   );
 }
 
@@ -705,14 +632,15 @@ export default function Home() {
   return (
     <div className="w-full min-h-screen bg-[#f5efe4] font-['Aileron',sans-serif]">
       <div className="relative mx-auto flex w-full max-w-[1440px] flex-col overflow-x-clip bg-white">
-        {/* 1. Navigation: 1440x69 (desktop) / 412x60 (mobile) */}
-        <nav className="sticky top-0 z-50 flex w-full flex-row items-center justify-between border-b border-[#D9D9D9]/50 bg-white px-[20px] md:px-[64px] py-[8px] md:py-[16px] gap-[8px] md:gap-0">
-          {/* Frame 1000005567 (242x36) > Frame 76 (165x35.934669 mobile 40x35.93, gap 4, pb 8, items-end) */}
-          <div className="flex h-[36px] w-[40px] md:w-[242px] shrink-0 items-center justify-center md:justify-start">
-            <div className="flex h-[35.934669px] flex-row items-end gap-[4px] pb-[8px] w-[40px] md:w-[165px] justify-center md:justify-start">
+        {/* 1. Navigation: 1440x69, px64 py16, border-b #D9D9D9 @50%, gap 310, SPACE_BETWEEN/CENTER */}
+        <nav className="sticky top-0 z-50 flex w-full flex-row items-center justify-between border-b border-[#D9D9D9]/50 bg-white px-[64px] py-[16px]">
+          {/* Frame 1000005567 (242x36) > Frame 76 (165x35.934669, gap 4, pb 8, items-end) */}
+          <div className="h-[36px] w-[242px]">
+            <div className="flex h-[35.934669px] w-[165px] flex-row items-end gap-[4px] pb-[8px]">
+              {/* Group 11 — 16x27.934668, 4 vectors */}
               {LOGO_MARK}
-              {/* "entors Eduserv" is HIDDEN on mobile (Figma visible:false) */}
-              <span className="hidden md:inline whitespace-nowrap text-[19.372341px] font-bold leading-[17.435106px]">
+              {/* Text "entors Eduserv" 139x17 — "E" carries style override 24 (#FF7800) */}
+              <span className="whitespace-nowrap text-[19.372341px] font-bold leading-[17.435106px]">
                 <span className="text-[#840107]">entors</span>
                 <span className="text-[#FF7800]">E</span>
                 <span className="text-[#840107]">duserv</span>
@@ -720,37 +648,31 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Center text (Mobile only, hidden on desktop) */}
-          <div className="flex flex-row items-center justify-center gap-[4px] md:hidden">
-            <span className="text-[15px] font-bold text-[#090909]">JEE Test Series</span>
-            <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 1L4 4L7 1" stroke="#FA7602" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-
-          {/* Frame 73 (275x32.6) — HIDDEN on mobile */}
-          <div className="hidden md:flex flex-row items-center gap-[4px]">
+          {/* Frame 73 (275x32.6, gap 4, items-center) */}
+          <div className="flex flex-row items-center gap-[4px]">
+            {/* MenuItem — 131x32.6, r12, gap 8, pad 12/8/12/0 */}
             <div className="flex cursor-pointer flex-col items-center justify-center gap-[8px] rounded-[12px] px-[12px] pt-[8px]">
               <span className="whitespace-nowrap text-[#090909] text-[15px] font-bold leading-[15px]">
                 <span className="text-[#FF671F]">JEE</span> Test Series
               </span>
+              {/* Frame 1000005239 — 64x1.6 r10 #000000 @90% */}
               <div className="h-[1.6px] w-[64px] rounded-[10px] bg-[#000000] opacity-90" />
             </div>
+            {/* MenuItem — 140x31, no radius */}
             <div className="flex cursor-pointer flex-col items-center justify-center gap-[8px] px-[12px] pt-[8px]">
               <span className="whitespace-nowrap text-[#333333] text-[15px] font-semibold leading-[15px] opacity-90">
                 <span className="text-[#FF671F] opacity-100">NEET</span> Test Series
               </span>
+              {/* Frame 1000005239 — 116x0, no fill */}
               <div className="h-0 w-full" />
             </div>
           </div>
 
-          {/* Frame 1000005226 — mobile icon-only pill 41.79px + green pill 44px + hamburger */}
-          <div className="flex flex-row items-center gap-[8px] md:gap-[10px] justify-end">
-            {/* Phone pill: icon-only on mobile, full label md+ */}
-            <div
-              className="flex flex-row items-center justify-center rounded-[49.653px] bg-[#EBEBEB] h-[34px] md:h-[34.756962px] gap-[3.97px] py-[5.96px] pl-[9.93px] pr-[9.93px] md:pl-[9.93px] md:pr-[15.89px] w-[41.79px] md:w-auto"
-              aria-label={PHONE_LABEL}
-            >
+          {/* Frame 1000005226 (227.652801x34.756962, gap 10, justify-end/items-center) */}
+          <div className="flex flex-row items-center justify-end gap-[10px]">
+            {/* Frame6 — 173.652801x34.756962 r49.653 #EBEBEB, pad 9.93/5.96/15.89 */}
+            <div className="flex h-[34.756962px] flex-row items-center justify-center gap-[3.97px] rounded-[49.653px] bg-[#EBEBEB] py-[5.96px] pl-[9.93px] pr-[15.89px]">
+              {/* Icon — 19.86x19.86, clipsContent; phone glyph 16.46x16.49 at (1.75, 1.65) */}
               <span className="relative block h-[19.86px] w-[19.86px] shrink-0 overflow-hidden">
                 <svg
                   width={16.46}
@@ -764,12 +686,12 @@ export default function Home() {
                   <path d={PHONE_PATH} fill="#090909" />
                 </svg>
               </span>
-              <span className="hidden md:inline whitespace-nowrap text-center text-[#090909] text-[14.896px] font-semibold leading-[22.344px] tracking-[-0.2979px]">
+              <span className="whitespace-nowrap text-center text-[#090909] text-[14.896px] font-semibold leading-[22.344px] tracking-[-0.2979px]">
                 {PHONE_LABEL}
               </span>
             </div>
-            {/* WhatsApp green pill */}
-            <button className="flex h-[34px] w-[44px] shrink-0 items-center justify-center gap-[3.97px] rounded-[49.653px] bg-[#1EA651] px-[12px] py-[4px] transition hover:opacity-90">
+            {/* Frame6 — 44x34 r49.653 #1EA651, pad 12/4 */}
+            <button className="flex h-[34px] w-[44px] items-center justify-center gap-[3.97px] rounded-[49.653px] bg-[#1EA651] px-[12px] py-[4px] transition hover:opacity-90">
               <svg
                 width={20}
                 height={20}
@@ -784,10 +706,9 @@ export default function Home() {
         </nav>
 
         {/* 2. Frame 11 Hero: Static Export */}
-        <section className="flex w-full justify-center bg-[#F5EFE4] relative mt-[-100px] md:mt-0 z-0 overflow-hidden">
-          {/* Desktop hero */}
+        <section className="flex w-full justify-center bg-[#F5EFE4]">
           <div
-            className="relative hidden w-full max-w-[1440px] md:block"
+            className="relative w-full max-w-[1440px]"
             style={{ aspectRatio: "1440 / 403" }}
           >
             <Image
@@ -796,55 +717,38 @@ export default function Home() {
               alt="Mentors Eduserv All India Test Series"
               className="object-contain"
               priority
-              unoptimized
-            />
-          </div>
-          {/* Mobile hero */}
-          <div
-            className="relative block w-full max-w-[412px] md:hidden"
-            style={{ aspectRatio: "412 / 445" }}
-          >
-            <Image
-              src="/assets/hero-mobile.png"
-              fill
-              alt="Mentors Eduserv All India Test Series"
-              className="object-contain"
-              priority
-              unoptimized
+              
             />
           </div>
         </section>
 
-        {/* 3. Frame 12: 1440x956 (desktop) / 412x1611 (mobile) */}
-        <section className="relative flex w-full flex-col bg-white px-[16px] md:px-0 pt-[24px] md:pt-[64.07px] pb-[24px] md:pb-[34.73px]">
-          {/* Line 3 — full-bleed on desktop */}
-          <div className="hidden md:block absolute top-[125.07px] right-0 left-0 h-px bg-[#000000] opacity-25" />
+        {/* 3. Frame 12: 1440x956, bg #FFFFFF, pt 64.07 / pb 34.73 */}
+        <section className="relative flex w-full flex-col bg-white pt-[64.07px] pb-[34.73px]">
+          {/* Line 3 — full-bleed 1440x1 @ y125.07, #000000 @25% */}
+          <div className="absolute top-[125.07px] right-0 left-0 h-px bg-[#000000] opacity-25" />
 
-          {/* Content block: 100% mobile / 1099 mobile-fixed desktop */}
-          <div className="flex w-full justify-center pr-0 md:pr-[3px]">
-            <div className="flex w-full md:w-[1099px] flex-col">
-              {/* Title + chips row */}
-              <div className="flex flex-col md:flex-row items-start md:items-center gap-[12px] md:gap-[6.5px] md:pl-[0.5px]">
-                <span className="w-auto md:w-[181px] shrink-0 whitespace-nowrap text-[#000000] text-[20px] md:text-[24px] font-semibold leading-[25px] md:leading-[30px]">
+          {/* Frame 1000005493 — content block 1099 wide, origin x169 */}
+          <div className="flex w-full justify-center pr-[3px]">
+            <div className="flex w-[1099px] flex-col">
+              {/* Title 181x30 at y68.07 + Price filters 208x38 at y64.07, gap 6.5 */}
+              <div className="flex flex-row items-center gap-[6.5px] pl-[0.5px]">
+                <span className="w-[181px] shrink-0 whitespace-nowrap text-[#000000] text-[24px] font-semibold leading-[30px]">
                   Test Series 2027
                 </span>
-                <div className="flex flex-row gap-[8px] md:gap-[10px]">
+                <div className="flex flex-row gap-[10px]">
                   <Chip label="Class 12" selected />
                   <Chip label="12th passed" selected={false} />
                 </div>
               </div>
 
-              {/* Mobile horizontal line */}
-              <div className="md:hidden w-[calc(100%+32px)] ml-[-16px] h-px bg-[#000000] opacity-25 mt-[16px] mb-[16px]" />
-
-              {/* Price filters row 2 */}
-              <div className="md:mt-[47px] ml-0 md:ml-[8px] flex flex-row flex-wrap gap-[8px] md:gap-[10px]">
+              {/* Price filters 415x38 at y149.07, origin x177 */}
+              <div className="mt-[47px] ml-[8px] flex flex-row gap-[10px]">
                 <Chip label="JEE Main + Advanced" selected />
                 <Chip label="JEE Main" selected={false} />
               </div>
 
-              {/* Cards */}
-              <div className="mt-[24px] md:mt-[23px] flex w-full flex-col md:flex-row items-stretch gap-[12px] md:gap-[18px]">
+              {/* Frame 1000005493 — cards row 1099x711.2, gap 18, y210.07 */}
+              <div className="mt-[23px] flex w-full flex-row items-stretch gap-[18px]">
                 <PriceCard
                   stroke="#3D74EB"
                   tags={TAGS_LEFT}
@@ -856,8 +760,6 @@ export default function Home() {
                   }}
                   price="₹ 1,999"
                   original="₹ 2,499"
-                  mobilePrice="4,999"
-                  mobileOriginal="6,999"
                   ribbon={{
                     text: "Attempt from Anywhere",
                     left: -2.646484,
@@ -873,12 +775,10 @@ export default function Home() {
                   benefits={{
                     timing: "Instant access · Valid 12 months",
                     detail: "Attempt remotely at any time in each test window (Online)",
-                    bottomClass: "flex-1",
+                    bottomClass: "h-[38px] flex-none",
                   }}
                   price="₹ 4,299"
                   original="₹ 4,299"
-                  mobilePrice="7,499"
-                  mobileOriginal="11,999"
                   ribbon={{
                     text: "Nearest CBT Centre @ Patna",
                     left: -1.493164,
