@@ -446,8 +446,10 @@ function FeatureGroup({ f, defaultTickColor = "#000000" }: { f: FeatureGroupData
           const tickColor = isCBT ? "#E63B18" : defaultTickColor;
           return (
             <div key={it} className={`flex flex-row items-start w-full ${f.label === "Also Includes" ? "pl-[16px] md:pl-0" : ""}`}>
-              <div className="hidden md:flex flex-shrink-0 items-center justify-center mr-[8px] mt-[1px]">
-                <span style={{ color: tickColor }} className="text-[14px] font-bold leading-none">✓</span>
+              <div className="hidden md:flex flex-shrink-0 items-center justify-center mr-[8px] mt-[3px]">
+                <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 4L4.5 7.5L11 1" stroke={tickColor} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </div>
               <span className="w-full whitespace-pre-wrap text-[#000000] text-[15px] font-semibold leading-[18px]">
                 {it}
