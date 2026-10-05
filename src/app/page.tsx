@@ -436,9 +436,11 @@ function FeatureGroup({ f, defaultTickColor = "#000000" }: { f: FeatureGroupData
           const tickColor = isCBT ? "#E63B18" : defaultTickColor;
           return (
             <div key={it} className="flex flex-row items-start w-full">
-              <span className="hidden md:inline text-[15px] font-normal leading-[18px] mr-[8px]" style={{ color: isCBT ? "#E63B18" : "#000000" }}>
-                ✓
-              </span>
+              <div className="hidden md:flex flex-shrink-0 items-center justify-center mr-[8px] mt-[3px]">
+                <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 4L4.5 7.5L11 1" stroke={isCBT ? "#E63B18" : defaultTickColor} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
               <span className="w-full whitespace-pre-wrap text-[#000000] text-[15px] font-semibold leading-[18px]">
                 {it}
               </span>
@@ -547,7 +549,9 @@ function PriceCard({
           {/* Frame 1000005483 — gap 12px mobile / 16px desktop, pt 0 / 16px */}
           <div className="flex w-full flex-col items-start md:items-end gap-[12px] md:gap-[16px] pt-0 md:pt-[16px]">
             {features.map((f) => (
-              <FeatureGroup key={f.label} f={f} defaultTickColor={right ? "#E1451F" : "#3D74EB"} />
+              <div key={f.label} className={`w-full ${f.label === "Also Includes" ? "pt-[8px]" : ""}`}>
+                <FeatureGroup f={f} defaultTickColor={right ? "#E1451F" : "#3D74EB"} />
+              </div>
             ))}
           </div>
 
@@ -627,13 +631,15 @@ function RoadmapSection() {
       <section
         className="relative flex w-full justify-center md:hidden bg-white pb-[32px]"
       >
-        <div className="relative w-full max-w-[363px]" style={{ aspectRatio: "363/257" }}>
+        <div className="relative w-full max-w-[363px]">
           <Image
             src="/assets/roadmap-mobile.png"
-            fill
+            width={363}
+            height={257}
             alt="Get a free Roadmap"
-            className="object-contain"
+            className="w-full h-auto"
             priority
+            unoptimized
           />
           {/* Use bottom anchorage so it never overlaps the bottom graphics */}
           <div
@@ -687,15 +693,7 @@ export default function Home() {
 
           {/* Center text (Mobile only, hidden on desktop) */}
           <div className="flex flex-row items-center justify-center gap-[4px] md:hidden">
-            <span className="text-[12px] font-bold text-[#000000]">JEE Test Series</span>
-            <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 1L4 4L7 1" stroke="#FA7602" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-
-          {/* Center text (Mobile only, hidden on desktop) */}
-          <div className="flex flex-row items-center justify-center gap-[4px] md:hidden">
-            <span className="text-[12px] font-bold text-[#000000]">JEE Test Series</span>
+            <span className="text-[15px] font-bold text-[#090909]">JEE Test Series</span>
             <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1 1L4 4L7 1" stroke="#FA7602" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -842,7 +840,7 @@ export default function Home() {
                   benefits={{
                     timing: "Instant access · Valid 12 months",
                     detail: "Attempt remotely at any time in each test window (Online)",
-                    bottomClass: "h-[38px] flex-none",
+                    bottomClass: "flex-1",
                   }}
                   price="₹ 4,299"
                   original="₹ 4,299"
