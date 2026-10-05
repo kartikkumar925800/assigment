@@ -635,10 +635,10 @@ function RoadmapSection() {
             className="object-contain"
             priority
           />
-          {/* Percentages derived from the image raster */}
+          {/* Use bottom anchorage so it never overlaps the bottom graphics */}
           <div
             className="absolute flex w-[88%] max-w-[320px] flex-col gap-[9px]"
-            style={{ left: "50%", top: "54%", transform: "translate(-50%, 0)" }}
+            style={{ left: "50%", bottom: "24px", transform: "translate(-50%, 0)" }}
           >
           <div className="flex h-[48px] items-center gap-[8px] rounded-[36px] border border-white/[0.13] bg-white/[0.15] px-[20px] backdrop-blur-[41.85px]">
             <span className="font-['Inter',sans-serif] text-[15px] font-bold leading-[24px] text-white">
@@ -683,6 +683,22 @@ export default function Home() {
                 <span className="text-[#840107]">duserv</span>
               </span>
             </div>
+          </div>
+
+          {/* Center text (Mobile only, hidden on desktop) */}
+          <div className="flex flex-row items-center justify-center gap-[4px] md:hidden">
+            <span className="text-[12px] font-bold text-[#000000]">JEE Test Series</span>
+            <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1L4 4L7 1" stroke="#FA7602" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+
+          {/* Center text (Mobile only, hidden on desktop) */}
+          <div className="flex flex-row items-center justify-center gap-[4px] md:hidden">
+            <span className="text-[12px] font-bold text-[#000000]">JEE Test Series</span>
+            <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1L4 4L7 1" stroke="#FA7602" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </div>
 
           {/* Frame 73 (275x32.6) — HIDDEN on mobile */}
@@ -737,20 +753,11 @@ export default function Home() {
                 <path d={WHATSAPP_PATH} fill="#FFFFFF" />
               </svg>
             </button>
-            {/* Hamburger — static, mobile-only (Figma 52:178 40x40) */}
-            <button
-              className="flex md:hidden h-[40px] w-[40px] shrink-0 flex-col items-center justify-center gap-[4px] rounded-[20px] border border-[#E5E5E5] bg-white shadow-sm"
-              aria-label="Open menu"
-            >
-              <span className="block h-[2px] w-[18px] rounded-full bg-[#090909]" />
-              <span className="block h-[2px] w-[18px] rounded-full bg-[#090909]" />
-              <span className="block h-[2px] w-[18px] rounded-full bg-[#090909]" />
-            </button>
           </div>
         </nav>
 
         {/* 2. Frame 11 Hero: Static Export */}
-        <section className="flex w-full justify-center bg-[#F5EFE4] relative mt-[-32px] md:mt-0 z-0">
+        <section className="flex w-full justify-center bg-[#F5EFE4] relative mt-[-100px] md:mt-0 z-0 overflow-hidden">
           {/* Desktop hero */}
           <div
             className="relative hidden w-full max-w-[1440px] md:block"
