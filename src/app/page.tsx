@@ -1,347 +1,860 @@
 import Image from "next/image";
 
-export default function Home() {
+/* ------------------------------------------------------------------ *
+ * Figma GRADIENT_RADIAL -> CSS.
+ * Figma stores a radial gradient as three normalised handles:
+ *   h0 = centre, h1 = point at stop 100%, h2 = point on the conjugate axis.
+ * The exact SVG equivalent is the unit circle mapped through the linear
+ * transform  M(1,0)=h1-h0, M(0,1)=h2-h0, M(0,0)=h0.
+ * ------------------------------------------------------------------ */
+type Handle = readonly [number, number];
+type Stop = { offset: number; color: string; alpha?: number };
+
+function figmaRadial(
+  stops: Stop[],
+  h0: Handle,
+  h1: Handle,
+  h2: Handle,
+  w = 1,
+  h = 1,
+): string {
+  const a = (h1[0] - h0[0]) * w;
+  const b = (h1[1] - h0[1]) * h;
+  const c = (h2[0] - h0[0]) * w;
+  const d = (h2[1] - h0[1]) * h;
+  const e = h0[0] * w;
+  const f = h0[1] * h;
+  const nodes = stops
+    .map(
+      (s) =>
+        `<stop offset="${s.offset}" stop-color="${s.color}" stop-opacity="${s.alpha ?? 1}"/>`,
+    )
+    .join("");
+  const svg =
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">` +
+    `<radialGradient id="g" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="1" gradientTransform="matrix(${a} ${b} ${c} ${d} ${e} ${f})">${nodes}</radialGradient>` +
+    `<rect x="0" y="0" width="${w}" height="${h}" fill="url(#g)"/></svg>`;
+  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+}
+
+/* Frame 12 — Title "Online Test Pack" (left card, bbox 456.1x30) */
+const GRAD_TEXT_BLUE = figmaRadial(
+  [
+    { offset: 0.125716, color: "#5B8FFF" },
+    { offset: 0.617674, color: "#3D74EB" },
+    { offset: 1, color: "#234285" },
+  ],
+  [0.07534246, 0.06666662],
+  [0.91780823, 1.05],
+  [-0.09072998, 0.90913239],
+);
+
+/* Frame 12 — Title "Online Test Pack" (right card span, bbox 189x30) */
+const GRAD_TEXT_BLUE_SPAN = figmaRadial(
+  [
+    { offset: 0.125716, color: "#5B8FFF" },
+    { offset: 0.617674, color: "#3D74EB" },
+    { offset: 1, color: "#234285" },
+  ],
+  [0.07534249, 0.0666666],
+  [1.22751327, 0.79999995],
+  [-0.13345843, 1.31799205],
+);
+
+/* Frame 12 — Title "CBT Plus +" (bbox 128x25) */
+const GRAD_TEXT_CBT = figmaRadial(
+  [
+    { offset: 0.267893, color: "#F08E1D" },
+    { offset: 0.426972, color: "#EF6718" },
+    { offset: 0.870192, color: "#EE5A13" },
+    { offset: 1, color: "#DD141E" },
+  ],
+  [0.43086818, -1.13333318],
+  [0.21221865, 1.28333337],
+  [0.23310387, -3.05623872],
+);
+
+/* ------------------------------------------------------------------ *
+ * Navigation — Group 11 logo mark (16 x 27.934668 at 0,0)
+ * ------------------------------------------------------------------ */
+const LOGO_MARK = (
+  <svg
+    width={16}
+    height={27.934668}
+    viewBox="0 0 16 27.934668"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <svg
+      x={7.139893}
+      y={3.823408}
+      width={8.837469}
+      height={23.902102}
+      viewBox="0 0 9 24"
+      preserveAspectRatio="none"
+    >
+      <path
+        d="M0 9.55922C1.26404 7.64269 2.89243 5.77833 4.27309 3.91016C4.85164 3.12736 6.94683 0.240828 7.76545 0C8.628 0.155272 8.60868 2.53512 8.65761 3.22404C9.12758 9.84588 8.86765 16.5925 7.51325 23.13C7.45369 23.4175 7.29891 23.774 7.05453 23.9805L6.91134 24C6.24908 23.268 6.23889 14.8741 5.98941 13.3444C5.94698 13.0841 5.82689 11.2067 5.84016 10.9122C5.98704 7.63233 2.97018 8.22523 0.595062 9.89157C0.576807 9.90437 0.558685 9.91724 0.540686 9.93034C0.364557 9.81595 0.174065 9.67917 0 9.55922Z"
+        fill="#FF7900"
+      />
+    </svg>
+    <svg
+      x={0.809082}
+      y={10.15044}
+      width={9.136382}
+      height={17.784224}
+      viewBox="0 0 10 18"
+      preserveAspectRatio="none"
+    >
+      <path
+        d="M0.40941 0.330915C0.611952 0.195726 1.01946 -0.0698903 1.23407 0.0171646C2.59685 0.569971 5.26928 2.48687 6.40743 3.23198C6.58288 3.35289 6.7749 3.49076 6.95244 3.60607C8.02617 4.29675 8.41408 4.3227 9.24724 5.28744C7.74798 4.86146 6.4141 4.38012 4.87372 5.06566C2.30699 6.20789 2.38283 9.03219 2.18491 11.1841L1.78416 15.5565C1.72116 16.2406 1.65079 17.3727 1.45349 18C0.819837 17.1602 0.668025 16.4715 0.40941 15.5008C0.40941 15.5008 4.42792e-10 8.19961 2.21396e-10 4.64707C0 1.09453 0.40941 0.330915 0.40941 0.330915Z"
+        fill="#850007"
+      />
+    </svg>
+    <svg
+      x={13.151367}
+      y={0}
+      width={2.848742}
+      height={3.590939}
+      viewBox="0 0 3 4"
+      preserveAspectRatio="none"
+    >
+      <path
+        d="M1.46497 0H2.16861C3.47112 0.852395 3.13916 2.74328 1.8945 3.49585C0.270802 4.47767 -0.260082 2.70411 0.114724 1.59457C0.407162 0.728874 0.59392 0.503105 1.46497 0Z"
+        fill="#FF7900"
+      />
+    </svg>
+    <svg
+      x={0}
+      y={6.838068}
+      width={3.072521}
+      height={3.055109}
+      viewBox="0 0 4 4"
+      preserveAspectRatio="none"
+    >
+      <path
+        d="M1.57986 0.0154074C4.85518 0.994313 4.75792 5.39581 1.57986 3.51504C1.57986 3.51504 0 2.52156 0 1.15071C0 -0.220139 1.57986 0.0154074 1.57986 0.0154074Z"
+        fill="#FF7900"
+      />
+    </svg>
+  </svg>
+);
+
+/* Navigation — Phone icon inside Icon frame 19.86x19.86 at (1.75, 1.65) */
+const PHONE_LABEL = "+91  74629  99520";
+
+const PHONE_PATH =
+  "M18.333 14.0999V16.5998C18.334 16.8319 18.2864 17.0616 18.1935 17.2743C18.1005 17.4869 17.9641 17.6778 17.7931 17.8347C17.6221 17.9916 17.4202 18.111 17.2003 18.1854C16.9805 18.2597 16.7475 18.2874 16.5164 18.2665C13.9521 17.9878 11.489 17.1116 9.32478 15.7081C7.31132 14.4288 5.60427 12.7217 4.32483 10.7082C2.91649 8.53425 2.04005 6.0591 1.76653 3.4833C1.7457 3.25286 1.77309 3.0206 1.84694 2.80132C1.92079 2.58204 2.03949 2.38055 2.19549 2.20966C2.35148 2.03877 2.54135 1.90224 2.75301 1.80875C2.96465 1.71526 3.19346 1.66686 3.42484 1.66665H5.92481C6.32923 1.66267 6.72129 1.80588 7.02793 2.06959C7.33458 2.3333 7.53486 2.69951 7.59147 3.09997C7.69698 3.90002 7.89266 4.68556 8.17479 5.44161C8.28691 5.73988 8.31118 6.06404 8.24471 6.37566C8.17825 6.6873 8.02384 6.97336 7.79979 7.19993L6.74147 8.25825C7.92775 10.3445 9.65515 12.0719 11.7415 13.2582L12.7997 12.1999C13.0263 11.9758 13.3123 11.8214 13.624 11.755C13.9356 11.6885 14.2598 11.7128 14.558 11.8249C15.3141 12.107 16.0996 12.3027 16.8997 12.4082C17.3045 12.4653 17.6742 12.6692 17.9385 12.9811C18.2028 13.2931 18.3432 13.6912 18.333 14.0999Z";
+
+/* Navigation — WhatsApp glyph inside the 44x34 #1EA651 pill */
+const WHATSAPP_PATH =
+  "M12.9712 11.195C12.7796 11.0692 12.5879 11.0063 12.3962 11.2579L11.6294 12.2642C11.4377 12.3899 11.3099 12.4528 11.0543 12.327C10.0958 11.8239 8.75399 11.2579 7.60383 9.37107C7.53994 9.1195 7.66773 8.99371 7.79553 8.86792L8.37061 7.98742C8.4984 7.86164 8.43451 7.73585 8.37061 7.61006L7.60383 5.78616C7.41214 5.28302 7.22045 5.34591 7.02875 5.34591H6.51757C6.38978 5.34591 6.13419 5.40881 5.87859 5.66038C4.47284 7.04403 5.04792 8.99371 6.07029 10.2516C6.26198 10.5031 7.53994 12.7673 10.2875 13.9623C12.3323 14.8428 12.7796 14.717 13.3546 14.5912C14.0575 14.5283 14.7604 13.9623 15.0799 13.3962C15.1438 13.2075 15.4633 12.3899 15.2077 12.2642M10.1597 18.1761C7.53994 18.1761 5.55911 16.7925 5.55911 16.7925L2.42812 17.6101L3.19489 14.5912C3.19489 14.5912 1.91693 12.6415 1.91693 10.1887C1.91693 5.66038 5.6869 1.88679 10.3514 1.88679C14.6965 1.88679 18.4026 5.22013 18.4026 9.87421C18.4026 14.4025 14.6965 18.1132 10.1597 18.1761ZM0 20L5.30351 18.5535C6.8395 19.3274 8.5514 19.701 10.2758 19.6385C12.0002 19.576 13.6796 19.0795 15.1535 18.1964C16.6275 17.3133 17.8469 16.0731 18.6954 14.5941C19.5438 13.1152 19.993 11.4469 20 9.74843C20 4.33962 15.655 0 10.1597 0C8.39599 0.00444137 6.66419 0.463606 5.13681 1.33177C3.60943 2.19993 2.33977 3.44679 1.45428 4.94818C0.568786 6.44957 0.0983582 8.15309 0.089844 9.88911C0.0813299 11.6251 0.535026 13.333 1.40575 14.8428";
+
+/* ------------------------------------------------------------------ *
+ * Frame 12 — content
+ * ------------------------------------------------------------------ */
+type FeatureGroupData = {
+  label: string;
+  badgeBg: string;
+  badgeColor: string;
+  badgeSize: string;
+  badgeWeight: string;
+  badgeLeading: string;
+  items: string[];
+};
+
+const TAGS_LEFT = ["Class 12", "Online"];
+const TAGS_RIGHT = ["Class 12", "Online", "CBT"];
+
+const ORANGE_BADGE = {
+  badgeBg: "#FF671F",
+  badgeColor: "#FFFFFF",
+  badgeSize: "text-[14px]",
+  badgeWeight: "font-bold",
+  badgeLeading: "leading-[16.8px]",
+};
+
+const CREAM_BADGE = {
+  badgeBg: "#F5EFE4",
+  badgeColor: "#303030",
+  badgeSize: "text-[13px]",
+  badgeWeight: "font-semibold",
+  badgeLeading: "leading-[15.6px]",
+};
+
+const FEATURES_LEFT: FeatureGroupData[] = [
+  {
+    ...ORANGE_BADGE,
+    label: "JEE पकड़ Test series",
+    items: ["6 unit · 6 part tests · 22 full tests"],
+  },
+  {
+    ...ORANGE_BADGE,
+    label: "पड़ाव Mock Tests",
+    items: ["140+ Mock tests", "160+ PYQ tests"],
+  },
+  {
+    ...ORANGE_BADGE,
+    label: "आईना Sessions",
+    items: [
+      "AIR 1 Guidance Sessions",
+      "Boards vs Competitive Exam Management",
+      "Weak Topic Sessions, Based on Your Tests",
+    ],
+  },
+  {
+    ...CREAM_BADGE,
+    label: "Also Includes",
+    items: [
+      "Detailed Performance Analysis",
+      "Video Solutions for each Test Series Qs",
+    ],
+  },
+];
+
+const FEATURES_RIGHT: FeatureGroupData[] = [
+  FEATURES_LEFT[0],
+  FEATURES_LEFT[1],
+  FEATURES_LEFT[2],
+  {
+    ...CREAM_BADGE,
+    label: "Also Includes",
+    items: [
+      "Centre-Based CBT Tests",
+      "Detailed Performance Analysis",
+      "Video Solutions for each Test Series Qs",
+    ],
+  },
+];
+
+/* Frame 12 — Rectangle 190 ribbon vectors (exact exported geometry) */
+function RibbonShape({ right }: { right: boolean }) {
+  if (right) {
+    return (
+      <svg
+        width={279}
+        height={29}
+        viewBox="2 0 279 29"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="pointer-events-none absolute left-0 top-0 overflow-visible hidden md:block"
+      >
+        <defs>
+          <linearGradient
+            id="ribbonOrangeR"
+            gradientUnits="userSpaceOnUse"
+            x1={-1.34564}
+            y1={14.5}
+            x2={284.706}
+            y2={14.5}
+          >
+            <stop stopColor="#FFC34B" />
+            <stop offset={0.0817308} stopColor="#F06B27" />
+            <stop offset={1} stopColor="#C42701" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M2 2C2 0.895431 2.89543 0 4 0H281L271.818 8.68965C268.484 11.8456 268.484 17.1544 271.818 20.3104L281 29H4C2.89543 29 2 28.1046 2 27V14.5V2Z"
+          fill="url(#ribbonOrangeR)"
+        />
+        <path
+          d="M2 2C2 0.895431 2.89543 0 4 0H281L271.818 8.68965C268.484 11.8456 268.484 17.1544 271.818 20.3104L281 29H4C2.89543 29 2 28.1046 2 27V14.5V2Z"
+          fill="black"
+          fillOpacity={0.06}
+        />
+      </svg>
+    );
+  }
   return (
-    <div className="min-h-[150vh] bg-white text-gray-900 pb-20">
-      {/* Sticky Navbar */}
-      <nav className="sticky top-0 z-50 flex items-center justify-between px-2 md:px-6 py-3 md:py-4 bg-[#F5EFE4] transition-all">
-        <div className="flex items-center gap-1 md:gap-2">
-          {/* Logo */}
-          <div className="flex items-center">
-            <span className="text-[#F06B27] font-bold text-[32px] leading-none tracking-tighter mr-1">M</span>
-            <div className="flex flex-col leading-[1.1] text-gray-800 font-semibold text-[15px]">
-              <span>entors</span>
-              <span>Eduserv</span>
+    <svg
+      width={253}
+      height={29}
+      viewBox="2 0 253 29"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="pointer-events-none absolute left-0 top-0 overflow-visible hidden md:block"
+    >
+      <defs>
+        <linearGradient
+          id="ribbonOrangeL"
+          gradientUnits="userSpaceOnUse"
+          x1={-1.03386}
+          y1={14.5}
+          x2={258.361}
+          y2={14.5}
+        >
+          <stop stopColor="#FFC34B" />
+          <stop offset={0.0817308} stopColor="#F06B27" />
+          <stop offset={1} stopColor="#C42701" />
+        </linearGradient>
+        <linearGradient
+          id="ribbonBlueL"
+          gradientUnits="userSpaceOnUse"
+          x1={-19.9498}
+          y1={15}
+          x2={296.589}
+          y2={15}
+        >
+          <stop stopColor="#2857BF" />
+          <stop offset={0.129808} stopColor="#5489FB" />
+          <stop offset={0.617674} stopColor="#3D74EB" />
+          <stop offset={1} stopColor="#234285" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M2 2C2 0.895431 2.89543 0 4 0H255L246.41 8.96533C243.445 12.0596 243.445 16.9404 246.41 20.0347L255 29H4C2.89543 29 2 28.1046 2 27V14.5V2Z"
+        fill="url(#ribbonOrangeL)"
+      />
+      <path
+        d="M2 2C2 0.895431 2.89543 0 4 0H255L246.41 8.96533C243.445 12.0596 243.445 16.9404 246.41 20.0347L255 29H4C2.89543 29 2 28.1046 2 27V14.5V2Z"
+        fill="black"
+        fillOpacity={0.06}
+      />
+      <path
+        d="M2 2C2 0.895431 2.89543 0 4 0H255L246.41 8.96533C243.445 12.0596 243.445 16.9404 246.41 20.0347L255 29H4C2.89543 29 2 28.1046 2 27V14.5V2Z"
+        fill="url(#ribbonBlueL)"
+      />
+    </svg>
+  );
+}
+
+function Ribbon({
+  text,
+  left,
+  width,
+  textLeft,
+  right,
+}: {
+  text: string;
+  left: number;
+  width: number;
+  textLeft: number;
+  right: boolean;
+}) {
+  return (
+    <div
+      className="absolute z-10 hidden h-[29px] backdrop-blur-[4px] drop-shadow-[6px_8px_8px_rgba(0,0,0,0.1)] md:block"
+      style={{ left: `${left}px`, top: "137.995308px", width: `${width}px` }}
+    >
+      <RibbonShape right={right} />
+      <span
+        className="absolute top-[6.004692px] hidden whitespace-nowrap text-white text-[14px] font-bold leading-[16.8px] [text-shadow:0px_4px_4px_rgba(0,0,0,0.1)] md:block"
+        style={{ left: `${textLeft}px` }}
+      >
+        {text}
+      </span>
+    </div>
+  );
+}
+
+function ModeBadge({
+  text,
+  left,
+  bg,
+  inner,
+}: {
+  text: string;
+  left: number;
+  bg: string;
+  inner?: boolean;
+}) {
+  return (
+    <div
+      className={
+        "absolute top-[139.93px] z-10 hidden justify-center items-center gap-[10px] rounded-[37px] px-[12px] py-[4px] md:flex " +
+        (inner ? "shadow-[inset_0px_0px_8px_#FF8E78]" : "")
+      }
+      style={{ left: `${left}px`, backgroundColor: bg }}
+    >
+      <span className="whitespace-nowrap text-white text-[14px] font-bold leading-[16.8px] [text-shadow:0px_4px_4px_rgba(0,0,0,0.1)]">
+        {text}
+      </span>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ *
+ * Primitives
+ * ------------------------------------------------------------------ */
+function Chip({ label, selected }: { label: string; selected: boolean }) {
+  return (
+    <div
+      className={
+        selected
+          ? "flex items-center rounded-[999px] px-[14px] py-[10px] bg-[#090909]"
+          : "flex items-center rounded-[999px] px-[14px] py-[10px] bg-white shadow-[inset_0_0_0_1px_#C9C9C5]"
+      }
+    >
+      <span
+        className={
+          selected
+            ? "text-white text-[15px] font-semibold leading-[18px]"
+            : "text-[#171717] text-[15px] font-normal leading-[18px]"
+        }
+      >
+        {label}
+      </span>
+    </div>
+  );
+}
+
+function Tags({ tags }: { tags: string[] }) {
+  return (
+    <div className="flex flex-row items-center gap-[6px] pb-[8px]">
+      {tags.map((t) => (
+        <div
+          key={t}
+          className="flex justify-center items-center gap-[10px] rounded-[10px] px-[10px] py-[8px] bg-[#F4F4F4]"
+        >
+          <span className="whitespace-nowrap text-[#090909] text-[12px] font-semibold leading-[14.4px] tracking-[0.6px]">
+            {t}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function FeatureGroup({ f, defaultTickColor = "#000000" }: { f: FeatureGroupData; defaultTickColor?: string }) {
+  return (
+    <div className="flex flex-col w-full gap-[4px]">
+      <div
+        className="flex justify-center items-center self-start gap-[10px] rounded-[8px] px-[6px] py-[2px]"
+        style={{ backgroundColor: f.badgeBg }}
+      >
+        <span
+          className={`${f.badgeSize} ${f.badgeWeight} ${f.badgeLeading}`}
+          style={{ color: f.badgeColor }}
+        >
+          {f.label}
+        </span>
+      </div>
+      <div className="flex w-full flex-col gap-[4px]">
+        {f.items.map((it) => {
+          const isCBT = it.includes("Centre-Based");
+          const tickColor = isCBT ? "#E63B18" : defaultTickColor;
+          return (
+            <div key={it} className="flex flex-row items-start w-full">
+              <span className="hidden md:inline text-[15px] font-normal leading-[18px] mr-[8px]" style={{ color: isCBT ? "#E63B18" : "#000000" }}>
+                ✓
+              </span>
+              <span className="w-full whitespace-pre-wrap text-[#000000] text-[15px] font-semibold leading-[18px]">
+                {it}
+              </span>
             </div>
-          </div>
-        </div>
-        
-        {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8 tracking-wide">
-          <div className="flex flex-col items-center cursor-pointer">
-            <span className="text-gray-800 font-bold text-[15px] leading-none">JEE Test Series</span>
-            <div className="h-[2px] w-full bg-gray-800 mt-1.5"></div>
-          </div>
-          <span className="text-[#F06B27] cursor-pointer text-[15px] leading-none">NEET <span className="font-medium text-gray-500">Test Series</span></span>
-        </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 
-        <div className="flex items-center gap-1 md:gap-3">
-          <div className="flex items-center gap-1 md:gap-1.5 bg-white rounded-full pl-1.5 pr-2 py-1 md:pl-3 md:pr-4 md:py-1.5 border border-gray-300 shadow-sm">
-            <span className="text-[12px] md:text-[14px]">📞</span>
-            <span className="text-gray-800 font-semibold text-[12px] md:text-[14.9px] tracking-tight whitespace-nowrap">+91 74629 99520</span>
-          </div>
-          <button className="flex items-center justify-center bg-[#1EA651] rounded-full w-[44px] h-[34px] shadow-sm hover:opacity-90 transition">
-            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" className="w-[18px] h-[18px]">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.487-1.761-1.66-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-            </svg>
-          </button>
+function PriceFooter({ price, original }: { price: string; original: string }) {
+  return (
+    <div className="relative w-full h-auto md:h-[87px] rounded-b-[24px] bg-[#1A1A1A] flex flex-row md:block justify-between items-center px-[20px] py-[16px] md:p-0 gap-[16px] md:gap-0">
+      {/* Price block */}
+      <div className="md:absolute md:left-[41px] md:top-[15px] flex flex-col gap-[2px]">
+        <span className="w-full text-[#FF7800] text-[24px] font-bold leading-[28.8px]">
+          {price}
+        </span>
+        <div className="flex w-full flex-row items-center gap-[8px]">
+          <span className="text-white text-[13px] font-semibold leading-[18.2px] line-through">
+            {original}
+          </span>
+          <span className="whitespace-nowrap text-white text-[13px] font-semibold leading-[18.2px] opacity-60">
+            Limited time deal
+          </span>
         </div>
-      </nav>
+      </div>
+      {/* Buttons block */}
+      <div className="md:absolute md:right-[25.5px] md:top-[23px] flex flex-row items-center gap-[8px] w-auto">
+        <button className="hidden md:flex justify-center items-center gap-[10px] rounded-[10px] px-[14px] py-[8px] shadow-[0_0_0_1px_rgba(255,255,255,0.2)]">
+          <span className="whitespace-nowrap text-white text-[15px] font-semibold leading-[21px]">
+            View Details
+          </span>
+        </button>
+        <button className="flex justify-center items-center gap-[10px] rounded-[10px] bg-white px-[14px] py-[8px]">
+          <span className="whitespace-nowrap text-[#090909] text-[15px] font-semibold leading-[21px]">
+            <span className="md:hidden">View Details</span>
+            <span className="hidden md:inline">Register</span>
+          </span>
+        </button>
+      </div>
+    </div>
+  );
+}
 
-      {/* Hero Section */}
-      <div style={{ background: 'linear-gradient(180deg, #F5EFE4 0%, #D2C9B9 100%)', width: '100%' }}>
-        <section className="max-w-[1440px] mx-auto pt-[40px] pb-[40px] md:pt-[60px] md:pb-[32px] px-4 xl:px-[159px] relative z-0">
-            
-            {/* Massive Desktop Background Swoosh */}
-            <div 
-              className="absolute inset-0 w-full h-full z-10 pointer-events-none hidden md:block" 
-              style={{ filter: 'drop-shadow(-182px 195px 49.1px rgba(0,0,0,0.5))' }}
-            >
-              <img src="/swoosh-bg.png" alt="" className="w-full h-full object-contain object-bottom" />
-            </div>
+type CardProps = {
+  stroke: string;
+  tags: string[];
+  features: FeatureGroupData[];
+  benefits: { timing: string; detail: string; bottomClass: string };
+  price: string;
+  original: string;
+  ribbon: { text: string; left: number; width: number; textLeft: number };
+  badge: { text: string; left: number; bg: string; inner?: boolean };
+};
 
-            {/* Outer Black Card */}
-            <div 
-              className="relative w-full max-w-[1122px] mx-auto rounded-[27px] md:rounded-[32px] p-[6.75px] pb-[10px] md:p-[8px] md:pb-[12px]"
-              style={{ 
-                background: '#090909',
-                boxShadow: '0px 12px 26px 0px rgba(0,0,0,0.1), 0px 47px 47px 0px rgba(0,0,0,0.09), 0px 105px 63px 0px rgba(0,0,0,0.05), 0px 187px 75px 0px rgba(0,0,0,0.01)'
-              }}
-            >
-              {/* Inner Gradient Card */}
-              <div 
-                className="relative flex flex-col md:flex-row items-start md:items-center justify-between pt-6 pb-6 px-4 md:px-8 md:py-8 min-h-[250px] md:min-h-[287px] w-full rounded-[20px] md:rounded-[24px]"
-                style={{ 
-                  background: 'radial-gradient(94.13% 130.56% at 50% 15.28%, #323232 0%, #090909 100%)',
-                  border: '1px solid rgba(255,255,255,0.1)'
-                }}
-              >
-                {/* Grid & Blur Mask Background */}
-                <div 
-                  className="absolute right-0 top-0 h-full w-[80%] md:w-[850px] z-0 overflow-hidden rounded-[24px] pointer-events-none"
-                  style={{ 
-                    WebkitMaskImage: 'linear-gradient(to right, transparent, black 20%)', 
-                    maskImage: 'linear-gradient(to right, transparent, black 20%)' 
-                  }}
+function PriceCard({
+  stroke,
+  tags,
+  features,
+  benefits,
+  price,
+  original,
+  ribbon,
+  badge,
+}: CardProps) {
+  const right = stroke === "#E1451F";
+  return (
+    <div className="relative flex w-full md:w-[540.5px] md:h-[711.2px] flex-col">
+      {/* Frame 1000005298 / Frame 1000005303 — r24, #FFFFFF */}
+      <div className="flex w-full flex-1 flex-col rounded-[24px] bg-white">
+           {/* Frame 1000005485 — gap 33/24 on mobile, pad 18 vs 41/25, 1.2px inset stroke */}
+           <div
+            className="flex h-auto md:h-[624.2px] w-full flex-col gap-[24px] md:gap-[33px] rounded-t-[24px] px-[18px] md:px-[42.2px] pt-[18px] md:pt-[25.2px] pb-[18px] md:pb-[24px]"
+            style={{ boxShadow: `inset 0 0 0 1.2px ${stroke}` }}
+          >
+          {/* Frame 1000005484 — header, gap 2, pb 24/8 on mobile, h 116 vs 126 */}
+          <div className="flex w-full flex-col gap-[2px] pb-[8px] md:pb-[24px]">
+            <Tags tags={tags} />
+            <h3 className="w-full text-[#000000] text-[22px] md:text-[24px] font-bold leading-[27.5px] md:leading-[30px]">
+              JEE Main + Advanced 2027
+            </h3>
+            {right ? (
+              <div className="flex w-full flex-row items-center gap-[4px]">
+                <span
+                  className="whitespace-nowrap bg-clip-text font-['Inter',sans-serif] text-[22px] md:text-[24px] font-bold leading-[23.1px] md:leading-[25.2px] text-transparent bg-gradient-to-r from-[#F08E1D] via-[#EF6718] to-[#DD141E]"
                 >
-                  <img src="/maskg.svg" alt="" className="w-full h-full object-cover object-right opacity-40 md:opacity-100 mix-blend-screen md:mix-blend-normal" />
-                </div>
-
-
-                <div className="relative z-40 w-full pr-[140px] md:pr-0 md:w-[60%] text-left pt-2 pl-2 md:pl-2">
-                  <h2 className="text-white font-black text-[18px] md:text-[28px] mb-1 md:mb-1 tracking-wide flex items-center leading-none">ME<span className="text-[#FF7800]">A</span>ITS</h2>
-                  <h3 className="text-white text-[24px] md:text-[44px] font-bold mb-2 md:mb-3 leading-[1.1] tracking-tight">
-                    Mentors Eduserv’s<br className="hidden md:block" /> All India <br className="md:hidden" />Test Series
-                  </h3>
-                  <p className="text-[#F06B27] font-bold text-[16px] md:text-[24px] mb-6 md:mb-10">JEE Main & Adv 2027</p>
-                  
-                  <p className="text-gray-400 text-[10px] md:text-[13px] font-medium mb-2 md:mb-3">Designed by <br className="md:hidden" />Mr. Anand Jaiswal</p>
-                  
-                  <div className="flex gap-2">
-                    <div className="w-1.5 h-1.5 bg-[#F06B27] rounded-full"></div>
-                    <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div>
-                    <div className="w-1.5 h-1.5 bg-gray-500 rounded-full"></div>
-                  </div>
-                </div>
-                
-                {/* Real Teacher Image - Breaking out of the box */}
-                <div className="absolute bottom-[-55px] md:bottom-[-40px] right-[-10px] md:-right-[20px] z-30 w-[197px] md:w-[320px] flex justify-end pointer-events-none">
-                   <Image 
-                     src="/teacher.png" 
-                     alt="Mr. Anand Jaiswal" 
-                     width={420} 
-                     height={500} 
-                     className="object-contain w-full h-auto" 
-                     style={{ filter: 'drop-shadow(7px 16px 17px rgba(0,0,0,0.25))' }}
-                     priority 
-                   />
-                </div>
+                  CBT Plus +
+                </span>
+                <span
+                  className="whitespace-nowrap bg-clip-text text-[22px] md:text-[24px] font-bold leading-[27.5px] md:leading-[30px] text-transparent bg-gradient-to-r from-[#5B8FFF] via-[#3D74EB] to-[#234285]"
+                >
+                  Online Test Pack
+                </span>
               </div>
-            </div>
-          </section>
+            ) : (
+              <span
+                className="w-full bg-clip-text text-[22px] md:text-[24px] font-bold leading-[27.5px] md:leading-[30px] text-transparent bg-gradient-to-r from-[#5B8FFF] via-[#3D74EB] to-[#234285]"
+              >
+                Online Test Pack
+              </span>
+            )}
+          </div>
+
+          {/* Frame 1000005483 — gap 12px mobile / 16px desktop, pt 0 / 16px */}
+          <div className="flex w-full flex-col items-start md:items-end gap-[12px] md:gap-[16px] pt-0 md:pt-[16px]">
+            {features.map((f) => (
+              <FeatureGroup key={f.label} f={f} defaultTickColor={right ? "#E1451F" : "#3D74EB"} />
+            ))}
+          </div>
+
+          {/* Frame 1000005304 — primaryAxisAlignItems MAX */}
+          <div
+            className={`flex w-full flex-col justify-end gap-[4px] ${benefits.bottomClass}`}
+          >
+            <span className="w-full text-[#666666] text-[13px] font-normal leading-[15.6px]">
+              {benefits.timing}
+            </span>
+            <span className="w-full text-[#000000] text-[13px] font-normal leading-[18.2px]">
+              {benefits.detail}
+            </span>
+          </div>
+        </div>
+
+        <PriceFooter price={price} original={original} />
       </div>
 
-      {/* The rest of the content */}
-      <div className="relative z-10 pt-10 md:pt-16 mt-4 md:mt-0 pb-10">
-          
-          {/* Pricing Header */}
-          <section className="max-w-[1000px] mx-auto px-4">
-            <div className="flex flex-wrap items-center gap-3 mb-6">
-              <h2 className="text-[22px] font-bold mr-2 text-gray-900 tracking-tight">Test Series 2027</h2>
-              <span className="bg-[#111111] text-white text-[11px] font-bold px-4 py-1.5 rounded-full cursor-pointer">Class 12</span>
-              <span className="bg-white border border-gray-200 text-gray-500 hover:text-gray-800 text-[11px] font-semibold px-4 py-1.5 rounded-full cursor-pointer transition">12th passed</span>
-            </div>
-            
-            <div className="w-full h-px bg-gray-200 mb-6"></div>
-            
-            <div className="flex items-center gap-3 mb-8">
-              <span className="bg-[#111111] text-white text-[11px] font-bold px-4 py-1.5 rounded-full cursor-pointer">JEE Main + Advanced</span>
-              <span className="bg-white border border-gray-200 text-gray-500 hover:text-gray-800 text-[11px] font-semibold px-4 py-1.5 rounded-full cursor-pointer transition">JEE Main</span>
-            </div>
+      <Ribbon
+        text={ribbon.text}
+        left={ribbon.left}
+        width={ribbon.width}
+        textLeft={ribbon.textLeft}
+        right={right}
+      />
+      <ModeBadge text={badge.text} left={badge.left} bg={badge.bg} inner={badge.inner} />
+    </div>
+  );
+}
 
-            {/* Pricing Cards */}
-            <div className="grid md:grid-cols-2 gap-6 relative">
-              
-              {/* Absolute Claim Offer Badge */}
-              <div className="absolute -right-4 md:-right-[120px] top-16 md:top-24 z-50 hidden md:flex flex-col items-center pointer-events-auto cursor-pointer transition hover:-translate-y-1" style={{ width: '90px' }}>
-                <div className="relative flex flex-col items-center w-full">
-                  {/* Gift Icon */}
-                  <img src="/gift.png" alt="Gift" className="w-[34px] h-[34px] relative z-10 translate-y-[6px] drop-shadow-md" />
-                  
-                  {/* White Pill */}
-                  <div className="bg-white border border-[#E3E3E3] rounded-[39px] w-[90px] h-[30px] flex items-center justify-center relative z-20" style={{ boxShadow: '0px 3px 6px 0px rgba(0,0,0,0.1), 0px 10px 10px 0px rgba(0,0,0,0.09), 0px 23px 14px 0px rgba(0,0,0,0.05)' }}>
-                    <span className="text-[11px] font-bold text-gray-900 leading-none">Claim offer</span>
-                  </div>
-                  
-                  {/* Yellow 10% Off Pill */}
-                  <div className="bg-[#FFC34B] rounded-[10px] px-2.5 py-1 absolute bottom-[-12px] z-30 shadow-sm">
-                    <span className="text-[10px] font-bold text-gray-900 leading-none block">10% off</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 1: Online Test Pack */}
-              <div className="h-full bg-white rounded-[28px] border border-blue-100 overflow-hidden shadow-sm flex flex-col relative">
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-300 to-blue-500"></div>
-                <div className="p-7 md:p-9 flex-grow">
-                  <div className="flex gap-2 mb-4">
-                    <span className="bg-gray-50 text-gray-500 text-[9px] uppercase tracking-wider font-bold px-2 py-1 rounded">Class 12</span>
-                    <span className="bg-gray-50 text-gray-500 text-[9px] uppercase tracking-wider font-bold px-2 py-1 rounded">Online</span>
-                  </div>
-                  <h3 className="text-[22px] font-bold mb-1 text-gray-900">JEE Main + Advanced 2027</h3>
-                  <h4 className="text-blue-600 font-bold text-[17px] mb-6">Online Test Pack</h4>
-                  
-                  <div className="relative mb-8 mt-2">
-                     <div className="bg-gradient-to-r from-[#2857BF] to-[#234285] text-white text-[11px] font-bold py-1.5 px-6 inline-block rounded-r-md relative -left-7 md:-left-9 shadow-md">
-                       Attempt from Anywhere
-                       <div className="absolute right-[-8px] top-[0] border-t-[14px] border-t-transparent border-b-[14px] border-b-transparent border-l-[8px] border-l-[#234285]"></div>
-                     </div>
-                     <div className="absolute right-0 top-0 bg-[#2A2A2A] text-white text-[10px] font-bold py-1 px-3 rounded-full shadow-sm">
-                       Grind Mode
-                     </div>
-                  </div>
-
-                  {/* Features */}
-                  <div className="space-y-6">
-                    <div>
-                      <span className="bg-[#F06B27] text-white text-[14px] font-bold leading-none px-3 py-1 rounded inline-block mb-2.5">JEE पकड़ Test series</span>
-                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-center gap-2"><span className="text-black font-semibold text-[15px]">✓</span> 6 unit · 6 part tests · 22 full tests</p>
-                    </div>
-                    <div>
-                      <span className="bg-[#F06B27] text-white text-[14px] font-bold leading-none px-3 py-1 rounded inline-block mb-2.5">पढ़ाव Mock Tests</span>
-                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-center gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> 140+ Mock tests</p>
-                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-center gap-2"><span className="text-black font-semibold text-[15px]">✓</span> 160+ PYQ tests</p>
-                    </div>
-                    <div>
-                      <span className="bg-[#F06B27] text-white text-[14px] font-bold leading-none px-3 py-1 rounded inline-block mb-2.5">आईना Sessions</span>
-                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> AIR 1 Guidance Sessions</p>
-                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> Boards vs Competitive Exam Management</p>
-                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2"><span className="text-black font-semibold text-[15px]">✓</span> Weak Topic Sessions, Based on Your Tests</p>
-                    </div>
-                    <div className="pt-3">
-                      <span className="inline-block bg-[#F5EFE4] rounded-[8px] px-[6px] py-[2px] font-['Aileron',sans-serif] font-semibold text-[13px] text-[#303030] leading-none mb-3">Also Includes</span>
-                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> Detailed Performance Analysis</p>
-                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2"><span className="text-black font-semibold text-[15px]">✓</span> Video Solutions for each Test Series Qs</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="px-7 md:px-9 pb-5 pt-2">
-                  <p className="text-[10px] text-gray-400 font-medium mb-0.5">Instant access · Valid 12 months</p>
-                  <p className="text-[11px] text-gray-600 font-semibold">Attempt remotely at any time in each test window</p>
-                </div>
-
-                <div className="bg-[#262626] p-5 px-7 md:px-9 flex justify-between items-center rounded-b-[28px]">
-                  <div>
-                    <p className="text-[#F06B27] font-bold text-[22px] leading-none">₹ 1,999</p>
-                    <div className="flex items-center gap-2 text-[10px] mt-1">
-                      <span className="text-gray-400 line-through">₹ 2,499</span>
-                      <span className="text-gray-400 font-medium">Limited time deal</span>
-                    </div>
-                  </div>
-                  <button className="bg-white text-gray-900 font-bold text-[11px] py-2.5 px-5 rounded-full hover:bg-gray-100 transition shadow-sm">
-                    View Details
-                  </button>
-                </div>
-              </div>
-
-              {/* Card 2: CBT Plus */}
-              <div className="h-full bg-white rounded-[28px] border border-orange-200 overflow-hidden shadow-xl flex flex-col relative z-20">
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FFC34B] to-[#C42701]"></div>
-                <div className="p-7 md:p-9 flex-grow">
-                  <div className="flex gap-2 mb-4">
-                    <span className="bg-gray-50 text-gray-500 text-[9px] uppercase tracking-wider font-bold px-2 py-1 rounded">Class 12</span>
-                    <span className="bg-gray-50 text-gray-500 text-[9px] uppercase tracking-wider font-bold px-2 py-1 rounded">Online</span>
-                    <span className="bg-gray-50 text-gray-500 text-[9px] uppercase tracking-wider font-bold px-2 py-1 rounded">CBT</span>
-                  </div>
-                  <h3 className="text-[22px] font-bold mb-1 text-gray-900">JEE Main + Advanced 2027</h3>
-                  <h4 className="text-orange-600 font-bold text-[17px] mb-6 flex flex-wrap gap-1">
-                    <span className="text-[#D32F2F]">CBT Plus</span> <span className="text-gray-700">+</span> <span className="text-blue-600">Online Test Pack</span>
-                  </h4>
-                  
-                  <div className="relative mb-8 mt-2">
-                     <div className="bg-gradient-to-r from-[#FFC34B] via-[#F06B27] to-[#C42701] text-white text-[14px] font-bold leading-none py-2 px-6 inline-block rounded-r-md relative -left-7 md:-left-9 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.1)] backdrop-blur-sm flex items-center">
-                       Nearest CBT Centre @ Patna
-                       <div className="absolute right-[-8px] top-[0] border-t-[16px] border-t-transparent border-b-[16px] border-b-transparent border-l-[8px] border-l-[#C42701]"></div>
-                     </div>
-                     <div className="absolute right-0 top-0 bg-[#D32F2F] text-white text-[10px] font-bold py-1 px-3 rounded-full shadow-sm">
-                       Battle Mode
-                     </div>
-                  </div>
-
-                  {/* Features */}
-                  <div className="space-y-6">
-                    <div>
-                      <span className="bg-[#F06B27] text-white text-[14px] font-bold leading-none px-3 py-1 rounded inline-block mb-2.5">JEE पकड़ Test series</span>
-                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-center gap-2"><span className="text-black font-semibold text-[15px]">✓</span> 6 unit · 6 part tests · 22 full tests</p>
-                    </div>
-                    <div>
-                      <span className="bg-[#F06B27] text-white text-[14px] font-bold leading-none px-3 py-1 rounded inline-block mb-2.5">पढ़ाव Mock Tests</span>
-                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-center gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> 140+ Mock tests</p>
-                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-center gap-2"><span className="text-black font-semibold text-[15px]">✓</span> 160+ PYQ tests</p>
-                    </div>
-                    <div>
-                      <span className="bg-[#F06B27] text-white text-[14px] font-bold leading-none px-3 py-1 rounded inline-block mb-2.5">आईना Sessions</span>
-                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> AIR 1 Guidance Sessions</p>
-                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> Boards vs Competitive Exam Management</p>
-                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2"><span className="text-black font-semibold text-[15px]">✓</span> Weak Topic Sessions, Based on Your Tests</p>
-                    </div>
-                    <div className="pt-3">
-                      <span className="inline-block bg-[#F5EFE4] rounded-[8px] px-[6px] py-[2px] font-['Aileron',sans-serif] font-semibold text-[13px] text-[#303030] leading-none mb-3">Also Includes</span>
-                      <p className="text-[15px] font-[600] font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2 mb-2"><span className="text-red-500 font-bold text-[15px]">✓</span> Centre-Based CBT Tests</p>
-                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2 mb-2"><span className="text-black font-semibold text-[15px]">✓</span> Detailed Performance Analysis</p>
-                      <p className="text-[15px] font-normal font-['Aileron',sans-serif] leading-none text-black flex items-start gap-2"><span className="text-black font-semibold text-[15px]">✓</span> Video Solutions for each Test Series Qs</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="px-7 md:px-9 pb-5 pt-2">
-                  <p className="text-[10px] text-gray-400 font-medium mb-0.5">Instant access · Valid 12 months</p>
-                  <p className="text-[11px] text-gray-600 font-semibold">Attempt remotely at any time in each test window (Online)</p>
-                </div>
-
-                <div className="bg-[#262626] p-5 px-7 md:px-9 flex justify-between items-center rounded-b-[28px]">
-                  <div>
-                    <p className="text-[#F06B27] font-bold text-[22px] leading-none">₹ 3,999</p>
-                    <div className="flex items-center gap-2 text-[10px] mt-1">
-                      <span className="text-gray-400 line-through">₹ 4,299</span>
-                      <span className="text-gray-400 font-medium">Limited time deal</span>
-                    </div>
-                  </div>
-                  <button className="bg-white text-gray-900 font-bold text-[11px] py-2.5 px-5 rounded-full hover:bg-gray-100 transition shadow-sm">
-                    View Details
-                  </button>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* CTA Section */}
-          <section className="max-w-[1100px] mx-auto mt-24 px-4 mb-16 relative">
-            
-            {/* Background decorative shapes */}
-            <div className="absolute -left-6 bottom-0 w-24 h-24 bg-blue-500 rounded-[20px] transform -rotate-12 z-0 rounded-bl-[40px]"></div>
-            <div className="absolute -right-4 bottom-[-10px] w-20 h-20 bg-gray-500 rounded-[16px] transform rotate-12 z-0"></div>
-
-            <div className="bg-[#111111] rounded-[32px] p-10 md:p-14 flex flex-col md:flex-row items-center justify-between relative shadow-2xl z-20">
-               
-               {/* Left Side: Text */}
-               <div className="md:w-1/2 text-left z-20 mb-10 md:mb-0 relative">
-                 <h3 className="text-gray-300 text-[15px] font-medium mb-1">Stuck?</h3>
-                 <h2 className="text-white text-3xl md:text-[40px] font-bold tracking-tight leading-tight">Get a free Roadmap</h2>
-               </div>
-               
-               {/* Right Side: Form */}
-               <div className="w-full md:w-[400px] flex flex-col gap-3 z-20 relative">
-                 <div className="flex items-center bg-[#2A2A2A] rounded-full overflow-hidden shadow-inner border border-white/5">
-                   <div className="px-5 py-3.5 text-white text-sm font-bold bg-[#333333] border-r border-[#444]">
-                     +91
-                   </div>
-                   <input 
-                     type="tel" 
-                     placeholder="10-digit mobile number" 
-                     className="w-full bg-transparent text-white px-5 py-3.5 outline-none text-[15px] placeholder-gray-500"
-                   />
-                 </div>
-                 <button className="w-full bg-[#F06B27] hover:bg-orange-600 text-white font-bold py-3.5 rounded-full transition shadow-[0_4px_14px_0_rgba(240,107,39,0.39)] text-[16px]">
-                   Get Your RoadMap
-                 </button>
-               </div>
-
-               {/* Center Decorative Line with Dots (Absolute) */}
-               <div className="absolute left-0 top-1/2 md:top-[65%] w-full flex items-center z-10 opacity-80 pointer-events-none">
-                 <div className="w-[10%] border-t border-dashed border-gray-600"></div>
-                 <div className="flex items-center gap-4 px-4">
-                   <div className="w-4 h-4 rounded-full bg-gray-500"></div>
-                   <div className="w-4 h-4 rounded-full bg-gray-600"></div>
-                   <div className="w-4 h-4 rounded-full bg-yellow-400"></div>
-                   <div className="w-4 h-4 rounded-full bg-amber-600"></div>
-                   <div className="w-4 h-4 rounded-full bg-[#F06B27]"></div>
-                   <div className="w-4 h-4 rounded-full bg-red-500"></div>
-                   <div className="w-4 h-4 rounded-full bg-red-700"></div>
-                   <div className="w-4 h-4 rounded-full bg-orange-500"></div>
-                   <div className="w-4 h-4 rounded-full bg-orange-400"></div>
-                 </div>
-                 <div className="flex-grow border-t border-gray-600"></div>
-               </div>
-               
-            </div>
-            
-            <p className="text-[#333333] font-bold text-center mt-10 tracking-tight text-[15px]">
-              Built to Boost Your Preparation
-            </p>
-          </section>
+/* ------------------------------------------------------------------ *
+ * Roadmap Banner — static background + precise input overlay.
+ * Desktop: 1440x249 via roadmap-bg.png (aspectRatio 1440/249).
+ * Mobile : 363x257 via roadmap-mobile.png; input positioned at
+ *          937.5/1440×100% and 115/249×100% of the 1440 container.
+ * ------------------------------------------------------------------ */
+function RoadmapSection() {
+  return (
+    <>
+      {/* Desktop — 1440x249 */}
+      <section
+        className="relative hidden w-full max-w-[1440px] md:block"
+        style={{ aspectRatio: "1440/249" }}
+      >
+        <Image
+          src="/assets/roadmap-bg.png"
+          fill
+          alt="Get a free Roadmap"
+          className="object-contain"
+          priority
+        />
+        <div
+          className="absolute flex w-[18.4%] max-w-[265px] flex-col gap-[9px] pb-[100px]"
+          style={{ left: "65.104%", top: "46.184%" }}
+        >
+          <div className="flex h-[48px] w-full items-center gap-[8px] rounded-[36px] border border-white/[0.13] bg-white/[0.15] px-[20px] backdrop-blur-[41.85px]">
+            <span className="font-['Inter',sans-serif] text-[15px] font-bold leading-[24px] text-white">
+              +91
+            </span>
+            <input
+              type="tel"
+              placeholder="10-digit mobile number"
+              className="w-full bg-transparent font-['Inter',sans-serif] text-[16px] font-medium leading-[19.364px] text-white placeholder-white/40 focus:outline-none"
+              aria-label="10-digit mobile number"
+            />
+          </div>
+          <button className="flex h-[45px] w-full items-center justify-center gap-[12px] rounded-[36px] bg-[#FA7602] px-[12px] py-[16px]">
+            <span className="whitespace-nowrap font-['Inter',sans-serif] text-[16px] font-semibold leading-[19.364px] text-white">
+              Get Your RoadMap
+            </span>
+          </button>
         </div>
+      </section>
+      {/* Mobile — 363x257, input overlay via percentages so it scales fluidly */}
+      {/* Mobile — 363x257, centered with max width so it perfectly fits like Figma without blowing up full width */}
+      <section
+        className="relative flex w-full justify-center md:hidden bg-white pb-[32px]"
+      >
+        <div className="relative w-full max-w-[363px]" style={{ aspectRatio: "363/257" }}>
+          <Image
+            src="/assets/roadmap-mobile.png"
+            fill
+            alt="Get a free Roadmap"
+            className="object-contain"
+            priority
+          />
+          {/* Percentages derived from the image raster */}
+          <div
+            className="absolute flex w-[88%] max-w-[320px] flex-col gap-[9px]"
+            style={{ left: "50%", top: "54%", transform: "translate(-50%, 0)" }}
+          >
+          <div className="flex h-[48px] items-center gap-[8px] rounded-[36px] border border-white/[0.13] bg-white/[0.15] px-[20px] backdrop-blur-[41.85px]">
+            <span className="font-['Inter',sans-serif] text-[15px] font-bold leading-[24px] text-white">
+              +91
+            </span>
+            <input
+              type="tel"
+              placeholder="10-digit mobile number"
+              className="w-full bg-transparent font-['Inter',sans-serif] text-[16px] font-medium leading-[19.364px] text-white placeholder-white/40 focus:outline-none"
+              aria-label="10-digit mobile number"
+            />
+          </div>
+          <button className="flex h-[45px] w-full items-center justify-center gap-[12px] rounded-[36px] bg-[#FA7602] px-[12px] py-[16px]">
+            <span className="whitespace-nowrap font-['Inter',sans-serif] text-[16px] font-semibold leading-[19.364px] text-white">
+              Get Your RoadMap
+            </span>
+          </button>
+        </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+/* ------------------------------------------------------------------ *
+ * Page
+ * ------------------------------------------------------------------ */
+export default function Home() {
+  return (
+    <div className="w-full min-h-screen bg-[#f5efe4] font-['Aileron',sans-serif]">
+      <div className="relative mx-auto flex w-full max-w-[1440px] flex-col overflow-x-clip bg-white">
+        {/* 1. Navigation: 1440x69 (desktop) / 412x60 (mobile) */}
+        <nav className="sticky top-0 z-50 flex w-full flex-row items-center justify-between border-b border-[#D9D9D9]/50 bg-white px-[20px] md:px-[64px] py-[8px] md:py-[16px] gap-[8px] md:gap-0">
+          {/* Frame 1000005567 (242x36) > Frame 76 (165x35.934669 mobile 40x35.93, gap 4, pb 8, items-end) */}
+          <div className="flex h-[36px] w-[40px] md:w-[242px] shrink-0 items-center justify-center md:justify-start">
+            <div className="flex h-[35.934669px] flex-row items-end gap-[4px] pb-[8px] w-[40px] md:w-[165px] justify-center md:justify-start">
+              {LOGO_MARK}
+              {/* "entors Eduserv" is HIDDEN on mobile (Figma visible:false) */}
+              <span className="hidden md:inline whitespace-nowrap text-[19.372341px] font-bold leading-[17.435106px]">
+                <span className="text-[#840107]">entors</span>
+                <span className="text-[#FF7800]">E</span>
+                <span className="text-[#840107]">duserv</span>
+              </span>
+            </div>
+          </div>
+
+          {/* Frame 73 (275x32.6) — HIDDEN on mobile */}
+          <div className="hidden md:flex flex-row items-center gap-[4px]">
+            <div className="flex cursor-pointer flex-col items-center justify-center gap-[8px] rounded-[12px] px-[12px] pt-[8px]">
+              <span className="whitespace-nowrap text-[#090909] text-[15px] font-bold leading-[15px]">
+                <span className="text-[#FF671F]">JEE</span> Test Series
+              </span>
+              <div className="h-[1.6px] w-[64px] rounded-[10px] bg-[#000000] opacity-90" />
+            </div>
+            <div className="flex cursor-pointer flex-col items-center justify-center gap-[8px] px-[12px] pt-[8px]">
+              <span className="whitespace-nowrap text-[#333333] text-[15px] font-semibold leading-[15px] opacity-90">
+                <span className="text-[#FF671F] opacity-100">NEET</span> Test Series
+              </span>
+              <div className="h-0 w-full" />
+            </div>
+          </div>
+
+          {/* Frame 1000005226 — mobile icon-only pill 41.79px + green pill 44px + hamburger */}
+          <div className="flex flex-row items-center gap-[8px] md:gap-[10px] justify-end">
+            {/* Phone pill: icon-only on mobile, full label md+ */}
+            <div
+              className="flex flex-row items-center justify-center rounded-[49.653px] bg-[#EBEBEB] h-[34px] md:h-[34.756962px] gap-[3.97px] py-[5.96px] pl-[9.93px] pr-[9.93px] md:pl-[9.93px] md:pr-[15.89px] w-[41.79px] md:w-auto"
+              aria-label={PHONE_LABEL}
+            >
+              <span className="relative block h-[19.86px] w-[19.86px] shrink-0 overflow-hidden">
+                <svg
+                  width={16.46}
+                  height={16.49}
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  preserveAspectRatio="none"
+                  className="absolute left-[1.75px] top-[1.65px]"
+                >
+                  <path d={PHONE_PATH} fill="#090909" />
+                </svg>
+              </span>
+              <span className="hidden md:inline whitespace-nowrap text-center text-[#090909] text-[14.896px] font-semibold leading-[22.344px] tracking-[-0.2979px]">
+                {PHONE_LABEL}
+              </span>
+            </div>
+            {/* WhatsApp green pill */}
+            <button className="flex h-[34px] w-[44px] shrink-0 items-center justify-center gap-[3.97px] rounded-[49.653px] bg-[#1EA651] px-[12px] py-[4px] transition hover:opacity-90">
+              <svg
+                width={20}
+                height={20}
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d={WHATSAPP_PATH} fill="#FFFFFF" />
+              </svg>
+            </button>
+            {/* Hamburger — static, mobile-only (Figma 52:178 40x40) */}
+            <button
+              className="flex md:hidden h-[40px] w-[40px] shrink-0 flex-col items-center justify-center gap-[4px] rounded-[20px] border border-[#E5E5E5] bg-white shadow-sm"
+              aria-label="Open menu"
+            >
+              <span className="block h-[2px] w-[18px] rounded-full bg-[#090909]" />
+              <span className="block h-[2px] w-[18px] rounded-full bg-[#090909]" />
+              <span className="block h-[2px] w-[18px] rounded-full bg-[#090909]" />
+            </button>
+          </div>
+        </nav>
+
+        {/* 2. Frame 11 Hero: Static Export */}
+        <section className="flex w-full justify-center bg-[#F5EFE4] relative mt-[-32px] md:mt-0 z-0">
+          {/* Desktop hero */}
+          <div
+            className="relative hidden w-full max-w-[1440px] md:block"
+            style={{ aspectRatio: "1440 / 403" }}
+          >
+            <Image
+              src="/assets/hero-section.png"
+              fill
+              alt="Mentors Eduserv All India Test Series"
+              className="object-contain"
+              priority
+            />
+          </div>
+          {/* Mobile hero */}
+          <div
+            className="relative block w-full max-w-[412px] md:hidden"
+            style={{ aspectRatio: "412 / 445" }}
+          >
+            <Image
+              src="/assets/hero-mobile.png"
+              fill
+              alt="Mentors Eduserv All India Test Series"
+              className="object-contain"
+              priority
+            />
+          </div>
+        </section>
+
+        {/* 3. Frame 12: 1440x956 (desktop) / 412x1611 (mobile) */}
+        <section className="relative flex w-full flex-col bg-white px-[16px] md:px-0 pt-[24px] md:pt-[64.07px] pb-[24px] md:pb-[34.73px]">
+          {/* Line 3 — full-bleed on desktop */}
+          <div className="hidden md:block absolute top-[125.07px] right-0 left-0 h-px bg-[#000000] opacity-25" />
+
+          {/* Content block: 100% mobile / 1099 mobile-fixed desktop */}
+          <div className="flex w-full justify-center pr-0 md:pr-[3px]">
+            <div className="flex w-full md:w-[1099px] flex-col">
+              {/* Title + chips row */}
+              <div className="flex flex-col md:flex-row items-start md:items-center gap-[12px] md:gap-[6.5px] md:pl-[0.5px]">
+                <span className="w-auto md:w-[181px] shrink-0 whitespace-nowrap text-[#000000] text-[20px] md:text-[24px] font-semibold leading-[25px] md:leading-[30px]">
+                  Test Series 2027
+                </span>
+                <div className="flex flex-row gap-[8px] md:gap-[10px]">
+                  <Chip label="Class 12" selected />
+                  <Chip label="12th passed" selected={false} />
+                </div>
+              </div>
+
+              {/* Mobile horizontal line */}
+              <div className="md:hidden w-[calc(100%+32px)] ml-[-16px] h-px bg-[#000000] opacity-25 mt-[16px] mb-[16px]" />
+
+              {/* Price filters row 2 */}
+              <div className="md:mt-[47px] ml-0 md:ml-[8px] flex flex-row flex-wrap gap-[8px] md:gap-[10px]">
+                <Chip label="JEE Main + Advanced" selected />
+                <Chip label="JEE Main" selected={false} />
+              </div>
+
+              {/* Cards */}
+              <div className="mt-[24px] md:mt-[23px] flex w-full flex-col md:flex-row items-stretch gap-[12px] md:gap-[18px]">
+                <PriceCard
+                  stroke="#3D74EB"
+                  tags={TAGS_LEFT}
+                  features={FEATURES_LEFT}
+                  benefits={{
+                    timing: "Instant access · Valid 12 months",
+                    detail: "Attempt remotely at any time in each test window",
+                    bottomClass: "flex-1",
+                  }}
+                  price="₹ 1,999"
+                  original="₹ 2,499"
+                  ribbon={{
+                    text: "Attempt from Anywhere",
+                    left: -2.646484,
+                    width: 253,
+                    textLeft: 46.146484,
+                  }}
+                  badge={{ text: "Grind Mode", left: 418, bg: "#2E2E2E" }}
+                />
+                <PriceCard
+                  stroke="#E1451F"
+                  tags={TAGS_RIGHT}
+                  features={FEATURES_RIGHT}
+                  benefits={{
+                    timing: "Instant access · Valid 12 months",
+                    detail: "Attempt remotely at any time in each test window (Online)",
+                    bottomClass: "h-[38px] flex-none",
+                  }}
+                  price="₹ 4,299"
+                  original="₹ 4,299"
+                  ribbon={{
+                    text: "Nearest CBT Centre @ Patna",
+                    left: -1.493164,
+                    width: 279,
+                    textLeft: 44.493164,
+                  }}
+                  badge={{ text: "Battle Mode", left: 417, bg: "#CF1400", inner: true }}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 4. Roadmap Banner */}
+        <RoadmapSection />
+      </div>
     </div>
   );
 }
