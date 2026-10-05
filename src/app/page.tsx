@@ -238,7 +238,7 @@ function RibbonShape({ right }: { right: boolean }) {
         viewBox="2 0 279 29"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="pointer-events-none absolute left-0 top-0 overflow-visible hidden md:block"
+        className="pointer-events-none absolute left-0 top-0 overflow-visible block"
       >
         <defs>
           <linearGradient
@@ -273,7 +273,7 @@ function RibbonShape({ right }: { right: boolean }) {
       viewBox="2 0 253 29"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="pointer-events-none absolute left-0 top-0 overflow-visible hidden md:block"
+      className="pointer-events-none absolute left-0 top-0 overflow-visible block"
     >
       <defs>
         <linearGradient
@@ -334,12 +334,12 @@ function Ribbon({
 }) {
   return (
     <div
-      className="absolute z-10 hidden h-[29px] backdrop-blur-[4px] drop-shadow-[6px_8px_8px_rgba(0,0,0,0.1)] md:block"
+      className="absolute z-10 block h-[29px] backdrop-blur-[4px] drop-shadow-[6px_8px_8px_rgba(0,0,0,0.1)]"
       style={{ left: `${left}px`, top: "137.995308px", width: `${width}px` }}
     >
       <RibbonShape right={right} />
       <span
-        className="absolute top-[6.004692px] hidden whitespace-nowrap text-white text-[14px] font-bold leading-[16.8px] [text-shadow:0px_4px_4px_rgba(0,0,0,0.1)] md:block"
+        className="absolute top-[6.004692px] block whitespace-nowrap text-white text-[14px] font-bold leading-[16.8px] [text-shadow:0px_4px_4px_rgba(0,0,0,0.1)]"
         style={{ left: `${textLeft}px` }}
       >
         {text}
@@ -420,12 +420,16 @@ function FeatureGroup({ f, defaultTickColor = "#000000" }: { f: FeatureGroupData
   return (
     <div className="flex flex-col w-full gap-[4px]">
       <div
-        className="flex justify-center items-center self-start gap-[10px] rounded-[8px] px-[6px] py-[2px]"
-        style={{ backgroundColor: f.badgeBg }}
+        className={`flex justify-center items-center self-start gap-[10px] rounded-[8px] ${
+          f.label === "Also Includes" ? "px-0 py-0 md:px-[6px] md:py-[2px] bg-transparent md:bg-[#F5EFE4]" : "px-[6px] py-[2px]"
+        }`}
+        style={f.label === "Also Includes" ? undefined : { backgroundColor: f.badgeBg }}
       >
         <span
-          className={`${f.badgeSize} ${f.badgeWeight} ${f.badgeLeading}`}
-          style={{ color: f.badgeColor }}
+          className={`${f.badgeSize} ${f.badgeWeight} ${f.badgeLeading} ${
+            f.label === "Also Includes" ? "text-[#808080] md:text-[#303030]" : ""
+          }`}
+          style={f.label === "Also Includes" ? undefined : { color: f.badgeColor }}
         >
           {f.label}
         </span>
@@ -435,7 +439,7 @@ function FeatureGroup({ f, defaultTickColor = "#000000" }: { f: FeatureGroupData
           const isCBT = it.includes("Centre-Based");
           const tickColor = isCBT ? "#E63B18" : defaultTickColor;
           return (
-            <div key={it} className="flex flex-row items-start w-full">
+            <div key={it} className={`flex flex-row items-start w-full ${f.label === "Also Includes" ? "pl-[16px] md:pl-0" : ""}`}>
               <div className="hidden md:flex flex-shrink-0 items-center justify-center mr-[8px] mt-[3px]">
                 <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1 4L4.5 7.5L11 1" stroke={isCBT ? "#E63B18" : defaultTickColor} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
