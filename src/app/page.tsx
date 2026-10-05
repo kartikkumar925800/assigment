@@ -767,6 +767,7 @@ export default function Home() {
               alt="Mentors Eduserv All India Test Series"
               className="object-contain"
               priority
+              unoptimized
             />
           </div>
           {/* Mobile hero */}
